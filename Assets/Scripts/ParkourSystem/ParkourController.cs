@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ParkourController : MonoBehaviour
 {
+    [SerializeField] List<ParkourAction> parkourActions;
+
     bool inAction = false;
 
     [SerializeField] float stepUpTime = 0.2f;
@@ -28,26 +30,58 @@ public class ParkourController : MonoBehaviour
             //var hitData = environmentScanner.ObstacleCheck();
             if (hitData.forwardHitFound)
             {
+                foreach (var action in parkourActions)
+                {
+                    if (action.CheckIfPossible(hitData, transform))
+                    {
+                        StartCoroutine(DoParkourAction(action));
+                        break;
+                    }
+                }
                 //Debug.Log("Obstacle Found " + hitData.forwardHit.transform.name);
-                StartCoroutine(DoParkourAction());
-                
             }
         }
     }
 
-    IEnumerator DoParkourAction()
+    IEnumerator DoParkourAction(ParkourAction action)
     {
         inAction = true;
         playerController.SetControl(false);
-        animator.CrossFade("StepUp", stepUpTime);
+        animator.CrossFade(action.AnimName, stepUpTime);
 
         yield return null;
 
         var animState = animator.GetNextAnimatorStateInfo(0);
+        if (!animState.IsName(action.AnimName))
+            Debug.LogError("The parkour animation is wrong");
 
-        yield return new WaitForSeconds(animState.length);
+        float timer = 0f;
+        while (timer <= animState.length)
+        {
+            timer += Time.deltaTime;
+
+            // Rotate player towards the obstacle
+            if (action.RotateToObstacle)
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, action.TargetRotation, playerController.RotationSpeed * Time.deltaTime);
+
+            if (action.EnableTargetMatching)
+                MatchTarget(action);
+
+            if (animator.IsInTransition(0) && timer > 0.5f)
+                break;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(action.PostActionDelay);
 
         playerController.SetControl(true);
         inAction = false;
+    }
+
+    void MatchTarget(ParkourAction action)
+    {
+        if(animator.isMatchingTarget) return;
+        animator.MatchTarget(action.MatchPos, transform.rotation, action.MatchBodyPart, new MatchTargetWeightMask(action.MatchPoseWeight, 0), action.MatchStartTime, action.MatchTargetTime);
     }
 }
