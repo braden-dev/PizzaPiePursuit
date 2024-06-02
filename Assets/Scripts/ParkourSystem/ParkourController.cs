@@ -10,19 +10,22 @@ public class ParkourController : MonoBehaviour
 
     EnvironmentScanner environmentScanner;
     Animator animator;
+    PlayerController playerController;
 
     private void Awake()
     {
         environmentScanner = GetComponent<EnvironmentScanner>();
         animator = GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
     {
+        var hitData = environmentScanner.ObstacleCheck();
 
         if (Input.GetButton("Jump") && !inAction)
         {
-            var hitData = environmentScanner.ObstacleCheck();
+            //var hitData = environmentScanner.ObstacleCheck();
             if (hitData.forwardHitFound)
             {
                 //Debug.Log("Obstacle Found " + hitData.forwardHit.transform.name);
@@ -35,6 +38,7 @@ public class ParkourController : MonoBehaviour
     IEnumerator DoParkourAction()
     {
         inAction = true;
+        playerController.SetControl(false);
         animator.CrossFade("StepUp", stepUpTime);
 
         yield return null;
@@ -43,6 +47,7 @@ public class ParkourController : MonoBehaviour
 
         yield return new WaitForSeconds(animState.length);
 
+        playerController.SetControl(true);
         inAction = false;
     }
 }

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     Quaternion targetRotation;
     bool isGrounded;
+    bool hasControl = true;
     float ySpeed;
 
     private void Awake()
@@ -37,6 +38,9 @@ public class PlayerController : MonoBehaviour
         var moveInput = (new Vector3(h, 0, v)).normalized;
 
         var moveDir = cameraController.PlanarRotation * moveInput;
+
+        if (!hasControl)
+            return;
 
         GroundCheck();
         Debug.Log("IsGrounded = " + isGrounded);
@@ -70,6 +74,18 @@ public class PlayerController : MonoBehaviour
     void GroundCheck()
     {
         isGrounded = Physics.CheckSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius, groundLayer);
+    }
+
+    public void SetControl(bool hasControl)
+    {
+        this.hasControl = hasControl;
+        characterController.enabled = hasControl;
+
+        if (!hasControl)
+        {
+            animator.SetFloat("moveAmount", 0f);
+            targetRotation = transform.rotation;
+        }
     }
 
     private void OnDrawGizmosSelected()

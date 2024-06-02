@@ -8,6 +8,7 @@ public class EnvironmentScanner : MonoBehaviour
     [SerializeField] float forwardRayLength = 0.8f;
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] float heightRayLength = 5;
+    
     public ObstacleHitData ObstacleCheck()
     {
         var forwardOrigin = transform.position + forwardRayOffset;
@@ -21,7 +22,7 @@ public class EnvironmentScanner : MonoBehaviour
         {
             var heightOrigin = hitData.forwardHit.point + Vector3.up * heightRayLength;
             hitData.heightHitFound = Physics.Raycast(heightOrigin, Vector3.down, out hitData.heightHit, heightRayLength, obstacleLayer);
-
+        
             Debug.DrawRay(heightOrigin, Vector3.down * heightRayLength, (hitData.heightHitFound) ? Color.red : Color.white);
         }
 
