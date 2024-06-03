@@ -1588,7 +1588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parkourActions:
   - {fileID: 11400000, guid: 3abf3a36a8b25c341a5419dff3ab5e0d, type: 2}
-  - {fileID: 11400000, guid: c0d55ce8047a1804c9b442a75c498091, type: 2}
+  - {fileID: 11400000, guid: 45bb49976c7269846ada6cff2e5ed224, type: 2}
   - {fileID: 11400000, guid: c6739d53a16916d46bef19a3e5cb0e0d, type: 2}
   - {fileID: 11400000, guid: 8914234363e8cba428d2e0d6aafc29ab, type: 2}
   stepUpTime: 0.2
