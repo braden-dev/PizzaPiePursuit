@@ -42,7 +42,7 @@ public class ParkourController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Q) && !inAction)
+        if (Input.GetKeyUp(KeyCode.LeftShift) && !inAction)
         {
             StartCoroutine(DoParkourAction(parkourActions[4]));
         }
