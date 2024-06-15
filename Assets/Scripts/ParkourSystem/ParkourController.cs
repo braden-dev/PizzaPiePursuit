@@ -41,6 +41,11 @@ public class ParkourController : MonoBehaviour
                 //Debug.Log("Obstacle Found " + hitData.forwardHit.transform.name);
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift) && !inAction)
+        {
+            StartCoroutine(DoParkourAction(parkourActions[4]));
+        }
     }
 
     IEnumerator DoParkourAction(ParkourAction action)
