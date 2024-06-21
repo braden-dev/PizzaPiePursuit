@@ -5,7 +5,7 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     [SerializeField] string keyName = "1";
-
+    public GameObject gameControlsObject;
     CanvasGroup canvasGroup;
 
     // Start is called before the first frame update
