@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fence
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
