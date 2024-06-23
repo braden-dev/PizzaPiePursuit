@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Fence
   - Drone
+  - PauseMenu
+  - GameControls
   layers:
   - Default
   - TransparentFX
