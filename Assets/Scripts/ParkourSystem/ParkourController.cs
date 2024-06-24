@@ -5,6 +5,8 @@ using UnityEngine;
 public class ParkourController : MonoBehaviour
 {
     [SerializeField] List<ParkourAction> parkourActions;
+    [SerializeField] ParkourAction jumpDownAction;
+    [SerializeField] float autoDropHeightLimit = 1f;
 
     bool inAction = false;
 
@@ -27,7 +29,6 @@ public class ParkourController : MonoBehaviour
 
         if (Input.GetButton("Jump") && !inAction)
         {
-            //var hitData = environmentScanner.ObstacleCheck();
             if (hitData.forwardHitFound)
             {
                 foreach (var action in parkourActions)
@@ -38,7 +39,19 @@ public class ParkourController : MonoBehaviour
                         break;
                     }
                 }
-                //Debug.Log("Obstacle Found " + hitData.forwardHit.transform.name);
+            }
+        }
+        
+        if (playerController.IsOnLedge && !inAction && !hitData.forwardHitFound)
+        {
+            bool shouldJump = true;
+            if (playerController.LedgeData.height > autoDropHeightLimit && !Input.GetButton("Jump"))
+                shouldJump = false;
+
+            if (shouldJump && playerController.LedgeData.angle <= 50)
+            {
+                playerController.IsOnLedge = false;
+                StartCoroutine(DoParkourAction(jumpDownAction));
             }
         }
 
@@ -71,7 +84,7 @@ public class ParkourController : MonoBehaviour
             if (action.RotateToObstacle)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, action.TargetRotation, playerController.RotationSpeed * Time.deltaTime);
 
-            if (action.EnableTargetMatching)
+            if (action.EnableTargetMatching && !animator.IsInTransition(0))
                 MatchTarget(action);
 
             if (animator.IsInTransition(0) && timer > 0.5f)
@@ -88,7 +101,7 @@ public class ParkourController : MonoBehaviour
 
     void MatchTarget(ParkourAction action)
     {
-        if(animator.isMatchingTarget) return;
+        if (animator.isMatchingTarget) return;
         animator.MatchTarget(action.MatchPos, transform.rotation, action.MatchBodyPart, new MatchTargetWeightMask(action.MatchPoseWeight, 0), action.MatchStartTime, action.MatchTargetTime);
     }
 }

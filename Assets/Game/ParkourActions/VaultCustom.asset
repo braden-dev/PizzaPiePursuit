@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a717770c2dba934da73b18c405d88e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dd84c90096acac4bae6407591b48817, type: 3}
   m_Name: VaultCustom
   m_EditorClassIdentifier: 
   animName: VaultFence
@@ -22,4 +22,4 @@ MonoBehaviour:
   matchBodyPart: 5
   matchStartTime: 0.12
   matchTargetTime: 0.32
-  matchPoseWeight: {x: 0, y: 1, z: 1}
+  matchPosWeight: {x: 0, y: 1, z: 1}

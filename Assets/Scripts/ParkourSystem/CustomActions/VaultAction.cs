@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [CreateAssetMenu(menuName = "Parkour System/Custom Actions/New Vault Action")]
-
 public class VaultAction : ParkourAction
 {
     public override bool CheckIfPossible(EnvironmentScanner.ObstacleHitData hitData, Transform player)
