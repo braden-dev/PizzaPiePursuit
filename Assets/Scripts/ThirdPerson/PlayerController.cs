@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         GroundCheck();
-        Debug.Log("IsGrounded = " + isGrounded);
+        //Debug.Log("IsGrounded = " + isGrounded);
         if (isGrounded)
         {
             ySpeed = -0.5f;

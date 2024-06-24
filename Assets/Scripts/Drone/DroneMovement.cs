@@ -85,8 +85,7 @@ public class DroneMovement : MonoBehaviour
                 }
                 else
                 {
-                    MaintainHoverHeight();
-                    AvoidObstacles();
+                    //AvoidObstacles();
                     MoveAlongSmoothedPath();
                     TryStartScan();
                 }
@@ -102,11 +101,14 @@ public class DroneMovement : MonoBehaviour
                 ChasePlayer();
                 break;
             case DroneState.Search:
+                Debug.Log("Searching for player");
                 SearchForPlayer();
                 break;
             default:
                 break;
         }
+        AvoidObstacles();
+        MaintainHoverHeight();
     }
 
     private void CheckForPlayer()
@@ -146,7 +148,9 @@ public class DroneMovement : MonoBehaviour
         Vector3 directionToLastKnown = (lastKnownPlayerPosition - transform.position).normalized;
         Vector3 extendedPosition = lastKnownPlayerPosition + directionToLastKnown * 7.0f; // 7 meters beyond the last known position
         Vector3 targetPosition = extendedPosition; // Move directly to the extended position
-        targetPosition.y = hoverHeight;
+
+        // Maintain the current height of the drone
+        targetPosition.y = transform.position.y;
 
         // Move towards the extended position at chaseSpeed
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, chaseSpeed * Time.deltaTime);
@@ -192,7 +196,9 @@ public class DroneMovement : MonoBehaviour
         else if (distanceToPlayer > 7.0f)
         {
             Vector3 targetPosition = player.transform.position - direction * 7.0f;
-            targetPosition.y = hoverHeight;
+
+            // Ensure the drone maintains its hover height
+            targetPosition.y = transform.position.y;
 
             // Apply separation force to avoid bouncing
             Vector3 finalPosition = Vector3.MoveTowards(transform.position, targetPosition, chaseSpeed * Time.deltaTime) + separationForce;
@@ -206,6 +212,9 @@ public class DroneMovement : MonoBehaviour
 
             transform.position = finalPosition;
         }
+
+        // Maintain hover height during the chase
+        //MaintainHoverHeight();
     }
 
     private Vector3 CalculateSeparationForce()
@@ -387,7 +396,15 @@ public class DroneMovement : MonoBehaviour
     private void MaintainHoverHeight()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, groundLayer))
+        float checkDistance = 10.0f; // Distance to check if the drone is floating between buildings
+
+        // Perform the raycast
+        bool isGroundDetected = Physics.Raycast(transform.position, Vector3.down, out hit, checkDistance, groundLayer);
+
+        // Draw the raycast for visualization
+        Debug.DrawRay(transform.position, Vector3.down * checkDistance, isGroundDetected ? Color.green : Color.red);
+
+        if (isGroundDetected)
         {
             float currentHeight = hit.distance;
             float heightDifference = hoverHeight - currentHeight;
@@ -414,6 +431,11 @@ public class DroneMovement : MonoBehaviour
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z), Time.deltaTime);
                 }
             }
+        }
+        else
+        {
+            // If no ground is detected within the check distance, maintain current height
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
     }
 
