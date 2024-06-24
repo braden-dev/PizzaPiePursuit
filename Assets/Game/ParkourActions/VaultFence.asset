@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f626e41b18767d14488097b71dae36bc, type: 3}
+  m_Script: {fileID: 11500000, guid: d124415d0e957e54192c67925215bfe7, type: 3}
   m_Name: VaultFence
   m_EditorClassIdentifier: 
   animName: VaultFence
@@ -19,7 +19,7 @@ MonoBehaviour:
   rotateToObstacle: 1
   postActionDelay: 0
   enableTargetMatching: 1
-  matchBodyPart: 4
+  matchBodyPart: 5
   matchStartTime: 0.12
   matchTargetTime: 0.32
-  matchPoseWeight: {x: 0, y: 1, z: 1}
+  matchPosWeight: {x: 0, y: 1, z: 1}
