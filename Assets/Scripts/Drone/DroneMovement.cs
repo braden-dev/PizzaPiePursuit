@@ -101,7 +101,7 @@ public class DroneMovement : MonoBehaviour
                 ChasePlayer();
                 break;
             case DroneState.Search:
-                Debug.Log("Searching for player");
+                //Debug.Log("Searching for player");
                 SearchForPlayer();
                 break;
             default:

@@ -101,10 +101,15 @@ public class GameControls : MonoBehaviour
             }
             else
             {
-                ShowCanvas(gameOverMenuCanvasGroup);
-                PauseGameplay();
+                EndGame();
             }
         }
+    }
+
+    public void EndGame()
+    {
+        ShowCanvas(gameOverMenuCanvasGroup);
+        PauseGameplay();
     }
 
     public void PauseGameplay()
