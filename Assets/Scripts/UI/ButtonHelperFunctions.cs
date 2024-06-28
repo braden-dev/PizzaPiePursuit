@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class ButtonHelperFunctions : MonoBehaviour
 {
-    public GameObject referenceGameObject;
-    CanvasGroup canvasGroup;
     GameControls gameControls;
 
     // Start is called before the first frame update
     void Start()
     {
         gameControls = GameObject.Find("GameController").GetComponent<GameControls>();
-        if (referenceGameObject != null)
-        {
-            canvasGroup = referenceGameObject.GetComponent<CanvasGroup>();
-        }
     }
 
     // Update is called once per frame
@@ -26,7 +20,6 @@ public class ButtonHelperFunctions : MonoBehaviour
 
     public void ResumeGameplay()
     {
-        gameControls.HideCanvas(canvasGroup);
         gameControls.ResumeGameplay();
     }
 
@@ -38,5 +31,35 @@ public class ButtonHelperFunctions : MonoBehaviour
     public void QuitGame()
     {
         gameControls.QuitGame();
+    }
+
+    public void RestartCurrentLevel()
+    {
+        gameControls.RestartCurrentLevel();
+    }
+
+    public void StartTutorial()
+    {
+        gameControls.StartTutorial();
+    }
+
+    public void StartLevel1()
+    {
+        gameControls.StartLevel1();
+    }
+
+    public void StartLevel2()
+    {
+        gameControls.StartLevel2();
+    }
+
+    public void LevelSelectMenu()
+    {
+        gameControls.LevelSelectMenu();
+    }
+
+    public void StartMenu()
+    {
+        gameControls.StartMenu();
     }
 }

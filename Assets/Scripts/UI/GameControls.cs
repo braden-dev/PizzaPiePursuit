@@ -8,7 +8,7 @@ public class GameControls : MonoBehaviour
 {
     // Game Variables.
     [Header("Game Variables")]
-    public string startScene = "Level_1";
+    public string sceneName = "Level_1";
     public float timer = 500f;
     public float timerRate = 0.01f;
     bool gamePaused = true;
@@ -17,6 +17,7 @@ public class GameControls : MonoBehaviour
     [Header("Pause Menu Variables")]
     public GameObject pauseMenu;
     public string pauseMenuKey = "1";
+    public string startMenuSceneName = "GameStart";
     CanvasGroup pauseMenuCanvasGroup;
 
     // Game Over Menu Variables.
@@ -30,6 +31,20 @@ public class GameControls : MonoBehaviour
     CanvasGroup hudCanvasGroup;
     public TextMeshProUGUI hudTimerText;
 
+    // Start Menu Variables.
+    [Header("Start Menu Variables")]
+    public GameObject startMenu;
+    public string tutorialSceneName = "Level_1";
+    CanvasGroup startMenuCanvasGroup;
+    bool sceneIsStartScreen = false;
+
+    // Level Select Menu Variables.
+    [Header("Level Select Menu Variables")]
+    public GameObject levelSelectMenu;
+    CanvasGroup levelSelectMenuCanvasGroup;
+    public string level1SceneName = "MainWorld";
+    public string level2SceneName = "Tutorial";
+
     
 
     // Start is called before the first frame update
@@ -41,67 +56,101 @@ public class GameControls : MonoBehaviour
     void Awake()
     {
         // Make sure gameplay is paused.
-        PauseGameplay();
+        PauseGameplayShort();
 
         // Initialize Pause Menu
-        pauseMenuCanvasGroup = pauseMenu.GetComponent<CanvasGroup>();
-        // code referenced here: https://forum.unity.com/threads/getcomponent-doesnt-works.516839/
-        if (pauseMenuCanvasGroup == null)
+        if (pauseMenu != null)
         {
-            Debug.Log("Error, pauseMenuCanvasGroup not found");
+            pauseMenuCanvasGroup = pauseMenu.GetComponent<CanvasGroup>();
+            // code referenced here: https://forum.unity.com/threads/getcomponent-doesnt-works.516839/
+            if (pauseMenuCanvasGroup == null)
+            {
+                Debug.Log("Error, pauseMenuCanvasGroup not found");
+            }
+            HideCanvas(pauseMenuCanvasGroup);
         }
-        HideCanvas(pauseMenuCanvasGroup);
 
-        // Initialize Pause Menu
-        gameOverMenuCanvasGroup = gameOverMenu.GetComponent<CanvasGroup>();
-        // code referenced here: https://forum.unity.com/threads/getcomponent-doesnt-works.516839/
-        if (gameOverMenuCanvasGroup == null)
+        // Initialize Game Over Menu
+        if (gameOverMenu != null)
         {
-            Debug.Log("Error, gameOverMenuCanvasGroup not found");
+            gameOverMenuCanvasGroup = gameOverMenu.GetComponent<CanvasGroup>();
+            if (gameOverMenuCanvasGroup == null)
+            {
+                Debug.Log("Error, gameOverMenuCanvasGroup not found");
+            }
+            HideCanvas(gameOverMenuCanvasGroup);
         }
-        HideCanvas(gameOverMenuCanvasGroup);
 
         // Initialize HUD.
-        hudCanvasGroup = hud.GetComponent<CanvasGroup>();
-        // code referenced here: https://forum.unity.com/threads/getcomponent-doesnt-works.516839/
-        if (hudCanvasGroup == null)
+        if (hud != null)
         {
-            Debug.Log("Error, hudCanvasGroup not found");
+            hudCanvasGroup = hud.GetComponent<CanvasGroup>();
+            if (hudCanvasGroup == null)
+            {
+                Debug.Log("Error, hudCanvasGroup not found");
+            }
+            ShowCanvas(hudCanvasGroup);
         }
-        ShowCanvas(hudCanvasGroup);
 
+        // Initialize Start Menu
+        if (startMenu != null)
+        {
+            startMenuCanvasGroup = startMenu.GetComponent<CanvasGroup>();
+            if (startMenuCanvasGroup == null)
+            {
+                Debug.Log("Error, startMenuCanvasGroup not found");
+            }
+            ShowCanvas(startMenuCanvasGroup);
+            sceneIsStartScreen = true;
+        }
 
-        // Resume Gameplay.
-        ResumeGameplay();
+        // Initialize Level Select Menu
+        if (levelSelectMenu != null)
+        {
+            levelSelectMenuCanvasGroup = levelSelectMenu.GetComponent<CanvasGroup>();
+            if (levelSelectMenuCanvasGroup == null)
+            {
+                Debug.Log("Error, levelSelectMenuCanvasGroup not found");
+            }
+            HideCanvas(levelSelectMenuCanvasGroup);
+        }
+            
+
+        if (sceneIsStartScreen == false)
+        {
+            // Resume Gameplay.
+            ResumeGameplayShort();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(pauseMenuKey))
+        if (sceneIsStartScreen == false)
         {
-            if (pauseMenuCanvasGroup.interactable)
+            if (Input.GetKeyDown(pauseMenuKey))
             {
-                HideCanvas(pauseMenuCanvasGroup);
-                ResumeGameplay();
+                if (pauseMenuCanvasGroup.interactable)
+                {
+                    ResumeGameplay();
+                }
+                else
+                {
+                    PauseGameplay();
+                }
             }
-            else
-            {
-                ShowCanvas(pauseMenuCanvasGroup);
-                PauseGameplay();
-            }
-        }
 
-        if (gamePaused == false)
-        {
-            if (timer > 0)
+            if (gamePaused == false)
             {
-                timer = timer - timerRate;
-                hudTimerText.text = Mathf.RoundToInt(timer).ToString();
-            }
-            else
-            {
-                EndGame();
+                if (timer > 0)
+                {
+                    timer = timer - timerRate*Time.deltaTime;
+                    hudTimerText.text = Mathf.RoundToInt(timer).ToString();
+                }
+                else
+                {
+                    EndGame();
+                }
             }
         }
     }
@@ -109,10 +158,10 @@ public class GameControls : MonoBehaviour
     public void EndGame()
     {
         ShowCanvas(gameOverMenuCanvasGroup);
-        PauseGameplay();
+        PauseGameplayShort();
     }
 
-    public void PauseGameplay()
+    public void PauseGameplayShort()
     {
         Time.timeScale = 0f;
         Cursor.visible = true;
@@ -120,7 +169,13 @@ public class GameControls : MonoBehaviour
         gamePaused = true;
     }
 
-    public void ResumeGameplay()
+    public void PauseGameplay()
+    {
+        PauseGameplayShort();
+        ShowCanvas(pauseMenuCanvasGroup);
+    }
+
+    public void ResumeGameplayShort()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -128,9 +183,15 @@ public class GameControls : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void ResumeGameplay()
+    {
+        HideCanvas(pauseMenuCanvasGroup);
+        ResumeGameplayShort();
+    }
+
     public void StartGame()
     {
-        SceneManager.LoadScene(startScene);
+        SceneManager.LoadScene(sceneName);
         //Time.timeScale = 1f;
     }
 
@@ -155,6 +216,55 @@ public class GameControls : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
+    }
+
+    public void StartLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
+    }
+
+    public void StartTutorial()
+    {
+        SceneManager.LoadScene(tutorialSceneName);
+    }
+
+    public void StartLevel1()
+    {
+        SceneManager.LoadScene(level1SceneName);
+    }
+
+    public void StartLevel2()
+    {
+        SceneManager.LoadScene(level2SceneName);
+    }
+
+    public void RestartCurrentLevel()
+    {
+        
+    }
+
+    public void HideMenus()
+    {
+
+    }
+
+    public void LevelSelectMenu()
+    {
+        HideCanvas(startMenuCanvasGroup);
+        ShowCanvas(levelSelectMenuCanvasGroup);
+    }
+
+    public void StartMenu()
+    {
+        if (sceneIsStartScreen)
+        {
+            HideCanvas(levelSelectMenuCanvasGroup);
+            ShowCanvas(startMenuCanvasGroup);
+        }
+        else
+        {
+            SceneManager.LoadScene(startMenuSceneName);
+        }
     }
 
 }

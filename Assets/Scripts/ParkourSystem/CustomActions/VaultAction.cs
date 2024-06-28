@@ -7,6 +7,9 @@ public class VaultAction : ParkourAction
 {
     public override bool CheckIfPossible(EnvironmentScanner.ObstacleHitData hitData, Transform player)
     {
+        while(true)
+        {
+        }
         if (!base.CheckIfPossible(hitData, player))
             return false;
         // Check if approaching obstacle from left or right side.
