@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    private int playerHealth;
+    private int playerHealth = 5;
+    private int playerMaxHealth = 5;
     public GameControls gameControlsScript;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerHealth = 5;
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(playerHealth <= 0)
@@ -24,13 +18,18 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log("Taking damage");
+        //Debug.Log("Taking damage");
         playerHealth -= 1;
     }
 
     public int GetHealth()
     {
         return playerHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return playerMaxHealth;
     }
 
     public void Heal(int healAmount)

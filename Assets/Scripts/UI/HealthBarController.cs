@@ -7,7 +7,7 @@ public class HealthBarController : MonoBehaviour
 {
     public PlayerHealthManager playerHealthManager; 
     public Image healthBar; 
-    private int maxHealth = 5;
+    private int maxHealth;
 
     void Start()
     {
@@ -19,6 +19,8 @@ public class HealthBarController : MonoBehaviour
         {
             Debug.LogError("PlayerHealthManager is not set.");
         }
+
+        maxHealth = playerHealthManager.GetMaxHealth();
     }
 
     void Update()
