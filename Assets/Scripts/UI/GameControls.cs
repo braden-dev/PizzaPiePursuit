@@ -24,6 +24,7 @@ public class GameControls : MonoBehaviour
     [Header("Game Over Menu Variables")]
     public GameObject gameOverMenu;
     CanvasGroup gameOverMenuCanvasGroup;
+    bool gameOverMenuShowing = false;
 
     // HUD Variables.
     [Header("HUD Variables")]
@@ -128,7 +129,7 @@ public class GameControls : MonoBehaviour
     {
         if (sceneIsStartScreen == false)
         {
-            if (Input.GetKeyDown(pauseMenuKey))
+            if (Input.GetKeyDown(pauseMenuKey) && gameOverMenuShowing == false)
             {
                 if (pauseMenuCanvasGroup.interactable)
                 {
@@ -158,6 +159,7 @@ public class GameControls : MonoBehaviour
     public void EndGame()
     {
         ShowCanvas(gameOverMenuCanvasGroup);
+        gameOverMenuShowing = true;
         PauseGameplayShort();
     }
 
