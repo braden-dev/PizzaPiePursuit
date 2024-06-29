@@ -46,7 +46,12 @@ public class GameControls : MonoBehaviour
     public string level1SceneName = "MainWorld";
     public string level2SceneName = "Tutorial";
 
-    
+    // Win Menu Variables.
+    [Header("Win Menu Variables")]
+    public GameObject winMenu;
+    CanvasGroup winMenuCanvasGroup;
+    bool winMenuShowing = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -116,11 +121,21 @@ public class GameControls : MonoBehaviour
             HideCanvas(levelSelectMenuCanvasGroup);
         }
             
-
         if (sceneIsStartScreen == false)
         {
             // Resume Gameplay.
             ResumeGameplayShort();
+        }
+
+        // Initialize Win Menu
+        if (winMenu != null)
+        {
+            winMenuCanvasGroup = winMenu.GetComponent<CanvasGroup>();
+            if (winMenuCanvasGroup == null)
+            {
+                Debug.Log("Error, winMenuCanvasGroup not found");
+            }
+            HideCanvas(winMenuCanvasGroup);
         }
     }
 
@@ -129,7 +144,7 @@ public class GameControls : MonoBehaviour
     {
         if (sceneIsStartScreen == false)
         {
-            if (Input.GetKeyDown(pauseMenuKey) && gameOverMenuShowing == false)
+            if (Input.GetKeyDown(pauseMenuKey) && gameOverMenuShowing == false && winMenuShowing == false)
             {
                 if (pauseMenuCanvasGroup.interactable)
                 {
@@ -267,6 +282,13 @@ public class GameControls : MonoBehaviour
         {
             SceneManager.LoadScene(startMenuSceneName);
         }
+    }
+
+    public void ShowWinMenu()
+    {
+        ShowCanvas(winMenuCanvasGroup);
+        winMenuShowing = true;
+        PauseGameplayShort();
     }
 
 }
