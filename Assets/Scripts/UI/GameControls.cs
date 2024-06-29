@@ -52,6 +52,12 @@ public class GameControls : MonoBehaviour
     CanvasGroup winMenuCanvasGroup;
     bool winMenuShowing = false;
 
+    // Start Level Menu Variables.
+    [Header("Start Level Menu Variables")]
+    public GameObject startLevelMenu;
+    CanvasGroup startLevelMenuCanvasGroup;
+    bool startLevelMenuShowing = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -137,6 +143,17 @@ public class GameControls : MonoBehaviour
             }
             HideCanvas(winMenuCanvasGroup);
         }
+
+        // Initialize Start Level Menu
+        if (startLevelMenu != null)
+        {
+            startLevelMenuCanvasGroup = startLevelMenu.GetComponent<CanvasGroup>();
+            if (startLevelMenuCanvasGroup == null)
+            {
+                Debug.Log("Error, startLevelMenuCanvasGroup not found");
+            }
+            HideCanvas(startLevelMenuCanvasGroup);
+        }
     }
 
     // Update is called once per frame
@@ -144,7 +161,7 @@ public class GameControls : MonoBehaviour
     {
         if (sceneIsStartScreen == false)
         {
-            if (Input.GetKeyDown(pauseMenuKey) && gameOverMenuShowing == false && winMenuShowing == false)
+            if (Input.GetKeyDown(pauseMenuKey) && gameOverMenuShowing == false && winMenuShowing == false && startLevelMenuShowing == false)
             {
                 if (pauseMenuCanvasGroup.interactable)
                 {
@@ -288,6 +305,13 @@ public class GameControls : MonoBehaviour
     {
         ShowCanvas(winMenuCanvasGroup);
         winMenuShowing = true;
+        PauseGameplayShort();
+    }
+
+    public void ShowStartLevelMenu()
+    {
+        ShowCanvas(startLevelMenuCanvasGroup);
+        startLevelMenuShowing = true;
         PauseGameplayShort();
     }
 
