@@ -21960,7 +21960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MainWorld
-  timer: 60
+  maxTimer: 60
   timerRate: 1
   pauseMenu: {fileID: 1292750365}
   pauseMenuKey: 1

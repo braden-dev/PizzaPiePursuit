@@ -9,8 +9,10 @@ public class GameControls : MonoBehaviour
     // Game Variables.
     [Header("Game Variables")]
     public string sceneName = "Tutorial";
-    public float timer = 500f;
+    public float maxTimer = 500f;
+    private float timer = 500f;
     public float timerRate = 0.01f;
+    private float currentRate = 0.0f;
     bool gamePaused = true;
     
     // Pause Menu Variables.
@@ -77,6 +79,8 @@ public class GameControls : MonoBehaviour
         // Make sure gameplay is paused.
         PauseGameplayShort();
 
+        timer = maxTimer;
+
         // Initialize Pause Menu
         if (pauseMenu != null)
         {
@@ -108,7 +112,8 @@ public class GameControls : MonoBehaviour
             {
                 Debug.Log("Error, hudCanvasGroup not found");
             }
-            ShowCanvas(hudCanvasGroup);
+            HideCanvas(hudCanvasGroup);
+            currentRate = 0.0f;
         }
 
         // Initialize Start Menu
@@ -184,7 +189,7 @@ public class GameControls : MonoBehaviour
             {
                 if (timer > 0)
                 {
-                    timer = timer - timerRate*Time.deltaTime;
+                    timer = timer - currentRate*Time.deltaTime;
                     hudTimerText.text = Mathf.RoundToInt(timer).ToString();
                 }
                 else
@@ -278,7 +283,10 @@ public class GameControls : MonoBehaviour
     {
         //SceneManager.LoadScene(level1SceneName);
         HideStartLevelMenu();
+        ShowCanvas(hudCanvasGroup);
         missionController.SetIsInMission(true);
+        timer = maxTimer;
+        currentRate = timerRate;
     }
 
     public void StartLevel2()
@@ -336,5 +344,4 @@ public class GameControls : MonoBehaviour
         startLevelMenuShowing = false;
         ResumeGameplayShort();
     }
-
 }
