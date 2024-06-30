@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector3 groundCheckOffset;
     [SerializeField] LayerMask groundLayer;
 
-    bool isGrounded;
+    private bool isGrounded;
+	public bool IsGrounded => isGrounded;
     bool hasControl = true;
 
     Vector3 desiredMoveDir;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     CharacterController characterController;
     EnvironmentScanner environmentScanner;
+
     private void Awake()
     {
         cameraController =  Camera.main.GetComponent<CameraController>();
@@ -126,6 +128,17 @@ public class PlayerController : MonoBehaviour
             moveDir = dir;
         }
     }
+
+	public void Jump(float force) 
+    {
+		if (isGrounded)
+        {
+        	ySpeed = force;
+			isGrounded = false;
+			animator.SetTrigger("jump");
+		}
+	}
+
 
     public void SetControl(bool hasControl)
     {
