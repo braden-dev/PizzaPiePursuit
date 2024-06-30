@@ -8,7 +8,7 @@ public class GameControls : MonoBehaviour
 {
     // Game Variables.
     [Header("Game Variables")]
-    public string sceneName = "Level_1";
+    public string sceneName = "Tutorial";
     public float timer = 500f;
     public float timerRate = 0.01f;
     bool gamePaused = true;
@@ -35,7 +35,7 @@ public class GameControls : MonoBehaviour
     // Start Menu Variables.
     [Header("Start Menu Variables")]
     public GameObject startMenu;
-    public string tutorialSceneName = "Level_1";
+    public string tutorialSceneName = "Tutorial";
     CanvasGroup startMenuCanvasGroup;
     bool sceneIsStartScreen = false;
 
