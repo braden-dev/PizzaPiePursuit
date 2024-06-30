@@ -8,6 +8,7 @@ TagManager:
   - Drone
   - PauseMenu
   - GameControls
+  - Barrel
   layers:
   - Default
   - TransparentFX
