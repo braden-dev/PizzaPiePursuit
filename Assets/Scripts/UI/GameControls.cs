@@ -45,6 +45,7 @@ public class GameControls : MonoBehaviour
     CanvasGroup levelSelectMenuCanvasGroup;
     public string level1SceneName = "MainWorld";
     public string level2SceneName = "Tutorial";
+    public string mainWorldSceneName = "MainWorld";
 
     // Win Menu Variables.
     [Header("Win Menu Variables")]
@@ -58,11 +59,17 @@ public class GameControls : MonoBehaviour
     CanvasGroup startLevelMenuCanvasGroup;
     bool startLevelMenuShowing = false;
 
+    [Header("Miscellaneous Variables")]
+    public MissionController missionController;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(missionController == null)
+        {
+            Debug.LogError("MisisonController script not set in GameControls script.");
+        }
     }
 
     void Awake()
@@ -262,9 +269,16 @@ public class GameControls : MonoBehaviour
         SceneManager.LoadScene(tutorialSceneName);
     }
 
+    public void LoadMainWorld()
+    {
+        SceneManager.LoadScene(mainWorldSceneName);
+    }
+
     public void StartLevel1()
     {
-        SceneManager.LoadScene(level1SceneName);
+        //SceneManager.LoadScene(level1SceneName);
+        HideStartLevelMenu();
+        missionController.SetIsInMission(true);
     }
 
     public void StartLevel2()
@@ -306,6 +320,7 @@ public class GameControls : MonoBehaviour
         ShowCanvas(winMenuCanvasGroup);
         winMenuShowing = true;
         PauseGameplayShort();
+        missionController.SetIsInMission(false);
     }
 
     public void ShowStartLevelMenu()
@@ -313,6 +328,13 @@ public class GameControls : MonoBehaviour
         ShowCanvas(startLevelMenuCanvasGroup);
         startLevelMenuShowing = true;
         PauseGameplayShort();
+    }
+
+    public void HideStartLevelMenu()
+    {
+        HideCanvas(startLevelMenuCanvasGroup);
+        startLevelMenuShowing = false;
+        ResumeGameplayShort();
     }
 
 }

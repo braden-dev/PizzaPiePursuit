@@ -62,4 +62,9 @@ public class ButtonHelperFunctions : MonoBehaviour
     {
         gameControls.StartMenu();
     }
+
+    public void LoadMainWorld()
+    {
+        gameControls.LoadMainWorld();
+    }
 }

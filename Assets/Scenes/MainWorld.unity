@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2959,7 +2959,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4924,7 +4924,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5059,7 +5059,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6777,6 +6777,7 @@ GameObject:
   - component: {fileID: 810875272}
   - component: {fileID: 810875271}
   - component: {fileID: 810875277}
+  - component: {fileID: 810875278}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6912,6 +6913,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameControlsScript: {fileID: 1965634155}
+--- !u!114 &810875278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810875270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f29351f2a2f76646a93b92457b82fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &826149873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2902483340091971296, guid: 18a67941e26c74e49a2ae24adffb4859, type: 3}
@@ -7433,7 +7446,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 850554434}
         m_TargetAssemblyTypeName: ButtonHelperFunctions, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: LoadMainWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8328,7 +8341,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.45
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9500,6 +9513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5eb9a5232e6bf408db52f841dbc4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emissiveLightObj: {fileID: 1989811418}
+  missionController: {fileID: 810875278}
 --- !u!65 &1095243158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9598,7 +9613,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.7
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10407,7 +10422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0.6}
   m_AnchorMax: {x: 0.8, y: 0.9}
-  m_AnchoredPosition: {x: -0, y: -48}
+  m_AnchoredPosition: {x: -0, y: -53}
   m_SizeDelta: {x: -30.2336, y: -19.8083}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1234648759
@@ -10430,7 +10445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Look around and go to the light pillar of delivery location!
+  m_text: Deliver the pizza to the marked house before time runs out!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -10457,7 +10472,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 37.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11561,7 +11576,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.8
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11696,7 +11711,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12080,7 +12095,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12270,7 +12285,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12405,7 +12420,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13152,7 +13167,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13339,7 +13354,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1523056195}
         m_TargetAssemblyTypeName: ButtonHelperFunctions, Assembly-CSharp
-        m_MethodName: StartLevel1
+        m_MethodName: LoadMainWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14107,7 +14122,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21209,7 +21224,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 46
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21383,8 +21398,10 @@ MonoBehaviour:
   levelSelectMenu: {fileID: 0}
   level1SceneName: MainWorld
   level2SceneName: Tutorial
+  mainWorldSceneName: MainWorld
   winMenu: {fileID: 1144859444}
   startLevelMenu: {fileID: 762190441}
+  missionController: {fileID: 810875278}
 --- !u!1001 &1980356723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21788,7 +21805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0.6}
   m_AnchorMax: {x: 0.8, y: 0.9}
-  m_AnchoredPosition: {x: -0.0000076293945, y: 9.904198}
+  m_AnchoredPosition: {x: 0, y: 63}
   m_SizeDelta: {x: -30.2336, y: -19.8083}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2044743022
@@ -21838,7 +21855,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.1
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
