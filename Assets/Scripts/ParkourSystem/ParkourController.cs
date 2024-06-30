@@ -7,6 +7,7 @@ public class ParkourController : MonoBehaviour
     [SerializeField] List<ParkourAction> parkourActions;
     [SerializeField] ParkourAction jumpDownAction;
     [SerializeField] float autoDropHeightLimit = 1f;
+    [SerializeField] private GroundJumpAction groundJumpAction;
 
     bool inAction = false;
 
@@ -29,7 +30,16 @@ public class ParkourController : MonoBehaviour
 
         if (Input.GetButton("Jump") && !inAction)
         {
-            if (hitData.forwardHitFound)
+            if (!hitData.forwardHitFound && groundJumpAction.CheckIfPossible(hitData, transform))
+            {
+                StartCoroutine(DoParkourAction(groundJumpAction));
+            }
+            // // Then check for ledge jump if on a ledge
+            // else if (playerController.IsOnLedge && ledgeJumpAction.CheckIfPossible(hitData, transform))
+            // {
+            //     StartCoroutine(DoParkourAction(ledgeJumpAction));
+            // }
+            else if (hitData.forwardHitFound)
             {
                 foreach (var action in parkourActions)
                 {
@@ -59,6 +69,21 @@ public class ParkourController : MonoBehaviour
         {
             StartCoroutine(DoParkourAction(parkourActions[4]));
         }
+    }
+    
+    IEnumerator DoGroundJump()
+    {
+        inAction = true;
+        playerController.SetControl(false);
+
+        playerController.Jump(groundJumpAction.JumpForce);
+
+        animator.CrossFade("RunningJump", 0.1f);
+
+        yield return new WaitForSeconds(groundJumpAction.JumpDuration);
+
+        playerController.SetControl(true);
+        inAction = false;
     }
 
     IEnumerator DoParkourAction(ParkourAction action)
