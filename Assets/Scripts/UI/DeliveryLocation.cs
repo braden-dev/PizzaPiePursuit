@@ -30,7 +30,7 @@ public class DeliveryLocation : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(missionController.GetIsInMission());
+        //Debug.Log(missionController.GetIsInMission());
         if(missionController.GetIsInMission())
             emissiveLightObj.SetActive(true);
         else

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6683285077127777822}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HPlatformRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 6683285077955824188}
   - component: {fileID: 6683285077955824191}
   - component: {fileID: 6683285077955824190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
