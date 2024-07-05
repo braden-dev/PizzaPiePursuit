@@ -12,10 +12,14 @@ public class EnvironmentScanner : MonoBehaviour
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] float ledgeHeightThreshold = 0.75f;
 
-    [SerializeField] Vector3 forwardRayOffsetJump = new Vector3(0, 2.5f, 0);
-    [SerializeField] float forwardRayLengthJump = 0.8f;
-    [SerializeField] Vector3 forwardRayOffsetSlide = new Vector3(0, 2.5f, 0);
-    [SerializeField] float forwardRayLengthSlide = 0.8f;
+    [SerializeField] Vector3 forwardRayOffsetJumpMax = new Vector3(0, 1.75f, 0);
+    [SerializeField] Vector3 forwardRayOffsetJumpMid = new Vector3(0, 1.0f, 0);
+    [SerializeField] Vector3 forwardRayOffsetJumpMin = new Vector3(0, 0.2f, 0);
+    [SerializeField] float forwardRayLengthJump = 2.75f;
+    [SerializeField] Vector3 forwardRayOffsetSlideMax = new Vector3(0, 0.75f, 0);
+    [SerializeField] Vector3 forwardRayOffsetSlideMid = new Vector3(0, 0.4f, 0);
+    [SerializeField] Vector3 forwardRayOffsetSlideMin = new Vector3(0, 0.1f, 0);
+    [SerializeField] float forwardRayLengthSlide = 5.5f;
 
     public ObstacleHitData ObstacleCheck()
     {
@@ -43,8 +47,14 @@ public class EnvironmentScanner : MonoBehaviour
     {
         var hitData = new ObstacleHitData();
 
-        var forwardOrigin = transform.position + forwardRayOffsetJump;
-        return !Physics.Raycast(forwardOrigin, transform.forward, 
+        var forwardOriginMax = transform.position + forwardRayOffsetJumpMax;
+        var forwardOriginMid = transform.position + forwardRayOffsetJumpMid;
+        var forwardOriginMin = transform.position + forwardRayOffsetJumpMin;
+        return !Physics.Raycast(forwardOriginMax, transform.forward, 
+            out hitData.forwardHit, forwardRayLengthJump, obstacleLayer) &&
+            !Physics.Raycast(forwardOriginMid, transform.forward, 
+            out hitData.forwardHit, forwardRayLengthJump, obstacleLayer) &&
+            !Physics.Raycast(forwardOriginMin, transform.forward, 
             out hitData.forwardHit, forwardRayLengthJump, obstacleLayer);
     }
 
@@ -52,8 +62,14 @@ public class EnvironmentScanner : MonoBehaviour
     {
         var hitData = new ObstacleHitData();
 
-        var forwardOrigin = transform.position + forwardRayOffsetSlide;
-        return !Physics.Raycast(forwardOrigin, transform.forward, 
+        var forwardOriginMax = transform.position + forwardRayOffsetSlideMax;
+        var forwardOriginMid = transform.position + forwardRayOffsetSlideMid;
+        var forwardOriginMin = transform.position + forwardRayOffsetSlideMin;
+        return !Physics.Raycast(forwardOriginMax, transform.forward, 
+            out hitData.forwardHit, forwardRayLengthSlide, obstacleLayer) &&
+            !Physics.Raycast(forwardOriginMid, transform.forward, 
+            out hitData.forwardHit, forwardRayLengthSlide, obstacleLayer) &&
+            !Physics.Raycast(forwardOriginMin, transform.forward, 
             out hitData.forwardHit, forwardRayLengthSlide, obstacleLayer);
     }
 
