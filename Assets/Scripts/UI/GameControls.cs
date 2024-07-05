@@ -6,6 +6,8 @@ using TMPro;
 
 public class GameControls : MonoBehaviour
 {
+    string targetName = "Player";
+
     // Game Variables.
     [Header("Game Variables")]
     public string sceneName = "Tutorial";
@@ -62,12 +64,14 @@ public class GameControls : MonoBehaviour
     bool startLevelMenuShowing = false;
 
     [Header("Miscellaneous Variables")]
-    public MissionController missionController;
+    private MissionController missionController;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject player = GameObject.Find(targetName);
+        missionController = player.GetComponent<MissionController>();
         if(missionController == null)
         {
             Debug.LogError("MisisonController script not set in GameControls script.");
