@@ -29,7 +29,7 @@ public class ParkourController : MonoBehaviour
 
         if (Input.GetButton("Jump") && !inAction)
         {
-            if (!hitData.forwardHitFound && playerController.IsGrounded)
+            if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded)
             {
                 StartCoroutine(DoParkourAction(parkourActions[5]));
             }
@@ -64,7 +64,7 @@ public class ParkourController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift) && !inAction)
+        if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyUp(KeyCode.LeftShift) && !inAction && playerController.IsGrounded)
         {
             StartCoroutine(DoParkourAction(parkourActions[4]));
         }
