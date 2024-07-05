@@ -337,9 +337,12 @@ public class GameControls : MonoBehaviour
 
     public void ShowStartLevelMenu()
     {
-        ShowCanvas(startLevelMenuCanvasGroup);
-        startLevelMenuShowing = true;
-        PauseGameplayShort();
+        if (missionController.GetIsInMission() == false)
+        {
+            ShowCanvas(startLevelMenuCanvasGroup);
+            startLevelMenuShowing = true;
+            PauseGameplayShort();
+        }
     }
 
     public void HideStartLevelMenu()
