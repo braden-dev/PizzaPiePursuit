@@ -6807,9 +6807,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6739d53a16916d46bef19a3e5cb0e0d, type: 2}
   - {fileID: 11400000, guid: 8914234363e8cba428d2e0d6aafc29ab, type: 2}
   - {fileID: 11400000, guid: 6ebc23e27a88d354692940d43e9a2c81, type: 2}
+  - {fileID: 11400000, guid: 93e30cf889308cd428cc4622e4525eeb, type: 2}
   jumpDownAction: {fileID: 11400000, guid: 0f46e3a3281252d4dbb64303206f862a, type: 2}
   autoDropHeightLimit: 1
-  groundJumpAction: {fileID: 11400000, guid: 4604f36e120ff93c7aed4065720a9660, type: 2}
   stepUpTime: 0.2
 --- !u!114 &810875272
 MonoBehaviour:
@@ -6831,6 +6831,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   ledgeHeightThreshold: 0.75
+  forwardRayOffsetJumpMax: {x: 0, y: 1.75, z: 0}
+  forwardRayOffsetJumpMid: {x: 0, y: 1, z: 0}
+  forwardRayOffsetJumpMin: {x: 0, y: 0.2, z: 0}
+  forwardRayLengthJump: 2.75
+  forwardRayOffsetSlideMax: {x: 0, y: 0.75, z: 0}
+  forwardRayOffsetSlideMid: {x: 0, y: 0.4, z: 0}
+  forwardRayOffsetSlideMin: {x: 0, y: 0.1, z: 0}
+  forwardRayLengthSlide: 5.5
 --- !u!143 &810875273
 CharacterController:
   m_ObjectHideFlags: 0
@@ -9044,7 +9052,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f47db7701453b46a5651d3cea8c9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followTarget: {fileID: 810875276}
   rotationSpeed: 2
   distance: 5
   minVerticalAngle: -10
@@ -21756,7 +21763,6 @@ MonoBehaviour:
   mainWorldSceneName: MainWorld
   winMenu: {fileID: 1144859444}
   startLevelMenu: {fileID: 762190441}
-  missionController: {fileID: 810875278}
 --- !u!1001 &1980356723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21774,7 +21780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a0c2edd3238dc79499414603831e0289, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.075
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a0c2edd3238dc79499414603831e0289, type: 3}
       propertyPath: m_LocalPosition.z
