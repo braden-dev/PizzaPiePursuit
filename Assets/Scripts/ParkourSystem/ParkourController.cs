@@ -15,12 +15,14 @@ public class ParkourController : MonoBehaviour
     EnvironmentScanner environmentScanner;
     Animator animator;
     PlayerController playerController;
+    Rigidbody rb;
 
     private void Awake()
     {
         environmentScanner = GetComponent<EnvironmentScanner>();
         animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -40,7 +42,7 @@ public class ParkourController : MonoBehaviour
                 {
                     if (action.CheckIfPossible(hitData, transform))
                     {
-                        StartCoroutine(DoParkourAction(action));
+                        StartCoroutine(DoParkourAction(action, 0.5f));
                         break;
                     }
                 }
@@ -56,23 +58,23 @@ public class ParkourController : MonoBehaviour
             if (shouldJump && playerController.LedgeData.angle <= 50)
             {
                 playerController.IsOnLedge = false;
-                StartCoroutine(DoParkourAction(jumpDownAction));
+                StartCoroutine(DoParkourAction(jumpDownAction, 0.5f));
             }
         }
 
         if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyDown(KeyCode.LeftShift) && !inAction && playerController.IsGrounded)
         {
-            StartCoroutine(DoParkourAction(parkourActions[4]));
+            StartCoroutine(DoParkourAction(parkourActions[4], 3.0f));
         }
 
         if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded && Input.GetKeyDown(KeyCode.Space) && !inAction)
         {
-            StartCoroutine(DoParkourAction(parkourActions[5]));
+            StartCoroutine(DoParkourAction(parkourActions[5], 3.0f));
         }
 
     }
 
-    IEnumerator DoParkourAction(ParkourAction action)
+    IEnumerator DoParkourAction(ParkourAction action, float timer_value)
     {
         inAction = true;
         playerController.SetControl(false);
@@ -98,7 +100,7 @@ public class ParkourController : MonoBehaviour
             if (action.EnableTargetMatching && !animator.IsInTransition(0))
                 MatchTarget(action);
 
-            if (animator.IsInTransition(0) && timer > 0.5f)
+            if (animator.IsInTransition(0) && timer > timer_value)
                 break;
 
             yield return null;
