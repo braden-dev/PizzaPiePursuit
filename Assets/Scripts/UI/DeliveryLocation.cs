@@ -9,6 +9,8 @@ public class DeliveryLocation : MonoBehaviour
     public GameObject emissiveLightObj;
     public MissionController missionController;
 
+    public AudioSource winSound;
+
     void Start()
     {
         gameControls = FindObjectOfType<GameControls>();
@@ -25,6 +27,10 @@ public class DeliveryLocation : MonoBehaviour
         if (missionController == null)
         {
             Debug.LogError("Mission Controller script not set for delivery location.");
+        }
+        if(winSound == null)
+        {
+            winSound = GetComponent<AudioSource>();
         }
     }
 
@@ -43,6 +49,10 @@ public class DeliveryLocation : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
+                if(winSound != null)
+                {
+                    winSound.Play();
+                }
                 gameControls.ShowWinMenu();
             }
         }

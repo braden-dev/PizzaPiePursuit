@@ -18,11 +18,18 @@ public class DroneShooting : MonoBehaviour
     private Vector3 previousPlayerPosition;
     private Vector3 playerVelocity;
 
+    public AudioSource laserBulletSound;
+
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         droneMovement = GetComponent<DroneMovement>();
         previousPlayerPosition = playerTransform.position;
+
+        if(laserBulletSound == null)
+        {
+            laserBulletSound = GetComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -56,6 +63,11 @@ public class DroneShooting : MonoBehaviour
         if (rb != null)
         {
             rb.velocity = aimDirection * laserSpeed;
+        }
+
+        if (laserBulletSound != null)
+        {
+            laserBulletSound.Play();
         }
     }
 

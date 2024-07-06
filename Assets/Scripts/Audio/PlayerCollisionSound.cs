@@ -14,10 +14,10 @@ public class PlayerCollisionSound : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided with another object");
+        //Debug.Log("Collided with another object");
         if (collision.collider.CompareTag("Barrel"))
         {
-            Debug.Log("Collided with a BARREL");
+            //Debug.Log("Collided with a BARREL");
             float volume = Mathf.Clamp01(collision.relativeVelocity.magnitude / 10.0f);
             audioSource.PlayOneShot(barrelCollisionSound, volume);
         }
