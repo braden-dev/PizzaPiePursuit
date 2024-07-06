@@ -27,18 +27,14 @@ public class ParkourController : MonoBehaviour
     {
         var hitData = environmentScanner.ObstacleCheck();
 
-        if (Input.GetButton("Jump") && !inAction)
+        if (Input.GetKeyUp(KeyCode.Space) && !inAction)
         {
-            if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded)
-            {
-                StartCoroutine(DoParkourAction(parkourActions[5]));
-            }
             // // Then check for ledge jump if on a ledge
             // else if (playerController.IsOnLedge && ledgeJumpAction.CheckIfPossible(hitData, transform))
             // {
             //     StartCoroutine(DoParkourAction(ledgeJumpAction));
             // }
-            else if (hitData.forwardHitFound)
+            if (hitData.forwardHitFound)
             {
                 foreach (var action in parkourActions)
                 {
@@ -54,7 +50,7 @@ public class ParkourController : MonoBehaviour
         if (playerController.IsOnLedge && !inAction && !hitData.forwardHitFound)
         {
             bool shouldJump = true;
-            if (playerController.LedgeData.height > autoDropHeightLimit && !Input.GetButton("Jump"))
+            if (playerController.LedgeData.height > autoDropHeightLimit && !Input.GetKeyUp(KeyCode.Space))
                 shouldJump = false;
 
             if (shouldJump && playerController.LedgeData.angle <= 50)
@@ -67,6 +63,11 @@ public class ParkourController : MonoBehaviour
         if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyUp(KeyCode.LeftShift) && !inAction && playerController.IsGrounded)
         {
             StartCoroutine(DoParkourAction(parkourActions[4]));
+        }
+
+        if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded && Input.GetKeyUp(KeyCode.Space) && !inAction)
+        {
+            StartCoroutine(DoParkourAction(parkourActions[5]));
         }
 
     }
