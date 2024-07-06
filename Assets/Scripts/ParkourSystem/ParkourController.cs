@@ -27,7 +27,7 @@ public class ParkourController : MonoBehaviour
     {
         var hitData = environmentScanner.ObstacleCheck();
 
-        if (Input.GetKeyUp(KeyCode.Space) && !inAction)
+        if (Input.GetKeyDown(KeyCode.Space) && !inAction)
         {
             // // Then check for ledge jump if on a ledge
             // else if (playerController.IsOnLedge && ledgeJumpAction.CheckIfPossible(hitData, transform))
@@ -60,12 +60,12 @@ public class ParkourController : MonoBehaviour
             }
         }
 
-        if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyUp(KeyCode.LeftShift) && !inAction && playerController.IsGrounded)
+        if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyDown(KeyCode.LeftShift) && !inAction && playerController.IsGrounded)
         {
             StartCoroutine(DoParkourAction(parkourActions[4]));
         }
 
-        if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded && Input.GetKeyUp(KeyCode.Space) && !inAction)
+        if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded && Input.GetKeyDown(KeyCode.Space) && !inAction)
         {
             StartCoroutine(DoParkourAction(parkourActions[5]));
         }
