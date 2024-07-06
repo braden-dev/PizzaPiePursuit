@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform followTarget;
+    //[SerializeField] Transform followTarget;
+    Transform followTarget;
+    string targetName = "Player";
     [SerializeField] float rotationSpeed = 2f;
     [SerializeField] float distance = 5f;
     [SerializeField] float minVerticalAngle = -45;
@@ -22,7 +24,8 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-
+        GameObject player = GameObject.Find(targetName);
+        followTarget = player.transform;
     }
 
     private void Update()
