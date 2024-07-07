@@ -11,7 +11,7 @@ public class BarrelCollisionSound : MonoBehaviour
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.spatialBlend = 1.0f; 
-        audioSource.volume = 0.3f; 
+        audioSource.volume = 0.5f; 
     }
 
     void OnCollisionEnter(Collision collision)

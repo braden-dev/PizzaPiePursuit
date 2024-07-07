@@ -23836,7 +23836,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 025654b05a5ce634dbd3c7e41f084cde, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -25487,7 +25487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 954715665249890537, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
       propertyPath: m_Volume
-      value: 0.45
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
@@ -25754,6 +25754,10 @@ PrefabInstance:
       propertyPath: laserPrefab
       value: 
       objectReference: {fileID: 1354887847809544728, guid: 46fb0ce0dda985246be4d4866b92d3a1, type: 3}
+    - target: {fileID: 8110914826921809671, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8497082361582843035, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
