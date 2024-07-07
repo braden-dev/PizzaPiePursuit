@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float rotationSpeed = 500f;
+    private float moveSpeed = 7f;
+    private float rotationSpeed = 500f;
 
-    [Header("Ground Check Settings")]
-    [SerializeField] float groundCheckRadius = 0.2f;
-    [SerializeField] Vector3 groundCheckOffset;
-    [SerializeField] LayerMask groundLayer;
+    //[Header("Ground Check Settings")]
+    private float groundCheckRadius = 0.2f;
+    private Vector3 groundCheckOffset = new Vector3(0f, 0.1f, 0.07f);
+    private LayerMask groundLayer;
+    private string groundLayerName = "Obstacles";
 
     private bool isGrounded;
 	public bool IsGrounded => isGrounded;
-    bool hasControl = true;
+    private bool hasControl = true;
 
-    Vector3 desiredMoveDir;
-    Vector3 moveDir;
-    Vector3 velocity;
+    private Vector3 desiredMoveDir;
+    private Vector3 moveDir;
+    private Vector3 velocity;
 
     public bool IsOnLedge { get; set; }
     public LedgeData LedgeData { get; set; }
 
-    float ySpeed;
-    Quaternion targetRotation;
+    private float ySpeed;
+    private Quaternion targetRotation;
 
-    CameraController cameraController;
-    Animator animator;
-    CharacterController characterController;
-    EnvironmentScanner environmentScanner;
+    private CameraController cameraController;
+    private Animator animator;
+    private CharacterController characterController;
+    private EnvironmentScanner environmentScanner;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         environmentScanner = GetComponent<EnvironmentScanner>();
+        groundLayer = LayerMask.GetMask(groundLayerName);
     }
 
     private void Update()
