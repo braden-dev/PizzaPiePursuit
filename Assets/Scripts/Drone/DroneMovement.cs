@@ -7,7 +7,7 @@ public class DroneMovement : MonoBehaviour
     [Header("Waypoint Settings")]
     public GameObject[] waypoints; // Array of waypoints
     public float waypointThreshold = 1.0f; // Distance to waypoint to consider it reached
-    private int currentWaypointIndex = 0; // Index of the current waypoint
+    //private int currentWaypointIndex = 0; // Index of the current waypoint
 
     [Header("Movement Settings")]
     public float hoverHeight = 5.0f; // Desired hover height above the ground

@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ButtonHelperFunctions : MonoBehaviour
 {
     GameControls gameControls;
+    public AudioSource buttonClick;
 
     // Start is called before the first frame update
     void Start()
     {
         gameControls = GameObject.Find("GameController").GetComponent<GameControls>();
+        if(buttonClick == null)
+        {
+            buttonClick = GameObject.Find("GameController").GetComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
@@ -18,53 +24,63 @@ public class ButtonHelperFunctions : MonoBehaviour
         
     }
 
+    private IEnumerator PlayClickSoundAndWait(Action action)
+    {
+        if (buttonClick != null)
+        {
+            buttonClick.Play();
+        }
+        yield return new WaitForSecondsRealtime(0.2f);
+        action.Invoke();
+    }
+
     public void ResumeGameplay()
     {
-        gameControls.ResumeGameplay();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.ResumeGameplay));
     }
 
     public void StartGame()
     {
-        gameControls.StartGame();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.StartGame));
     }
 
     public void QuitGame()
     {
-        gameControls.QuitGame();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.QuitGame));
     }
 
     public void RestartCurrentLevel()
     {
-        gameControls.RestartCurrentLevel();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.RestartCurrentLevel));
     }
 
     public void StartTutorial()
     {
-        gameControls.StartTutorial();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.StartTutorial));
     }
 
     public void StartLevel1()
     {
-        gameControls.StartLevel1();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.StartLevel1));
     }
 
     public void StartLevel2()
     {
-        gameControls.StartLevel2();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.StartLevel2));
     }
 
     public void LevelSelectMenu()
     {
-        gameControls.LevelSelectMenu();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.LevelSelectMenu));
     }
 
     public void StartMenu()
     {
-        gameControls.StartMenu();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.StartMenu));
     }
 
     public void LoadMainWorld()
     {
-        gameControls.LoadMainWorld();
+        StartCoroutine(PlayClickSoundAndWait(gameControls.LoadMainWorld));
     }
 }

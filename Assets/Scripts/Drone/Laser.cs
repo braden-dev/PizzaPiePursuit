@@ -35,8 +35,10 @@ public class Laser : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //Debug.Log("HIT PLAYER");
+            Debug.Log("Player health before taking damage IN LASER: " + playerHealthManager.GetHealth());
             playerHealthManager.TakeDamage();
+            Debug.Log("Player health after taking damage IN LASER: " + playerHealthManager.GetHealth());
         }
-        Destroy(gameObject); // Destroy the laser on impact with anything other than the drone
+        Destroy(gameObject);
     }
 }

@@ -28,7 +28,7 @@ public class HealthCollectableController : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            int healAmount = 5 - playerHealthManager.GetHealth();
+            int healAmount = playerHealthManager.GetMaxHealth() - playerHealthManager.GetHealth();
             playerHealthManager.Heal(healAmount);
 
             Destroy(gameObject);

@@ -7,6 +7,25 @@ public class PlayerHealthManager : MonoBehaviour
     private int playerHealth = 5;
     private int playerMaxHealth = 5;
     public GameControls gameControlsScript;
+    public AudioSource damageSound;
+
+    private bool isInvulnerable = false;
+    private float invulnerabilityDuration = 0.2f;
+
+    public AudioSource healthCollectableSound;
+
+    private void Start()
+    {
+        if(damageSound == null)
+        {
+            damageSound = GetComponent<AudioSource>();
+        }
+
+        if (healthCollectableSound == null)
+        {
+            healthCollectableSound = GetComponent<AudioSource>();
+        }
+    }
 
     void Update()
     {
@@ -18,8 +37,25 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void TakeDamage()
     {
-        //Debug.Log("Taking damage");
+        if (!isInvulnerable)
+        {
+            StartCoroutine(HandleDamage());
+        }
+    }
+
+    private IEnumerator HandleDamage()
+    {
+        Debug.Log("Player health before damage: " + playerHealth);
         playerHealth -= 1;
+        if (damageSound != null)
+        {
+            damageSound.Play();
+        }
+        Debug.Log("Player health after damage: " + playerHealth);
+
+        isInvulnerable = true;
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        isInvulnerable = false;
     }
 
     public int GetHealth()
@@ -35,5 +71,10 @@ public class PlayerHealthManager : MonoBehaviour
     public void Heal(int healAmount)
     {
         playerHealth += healAmount;
+
+        if (healthCollectableSound != null)
+        {
+            healthCollectableSound.Play();
+        }
     }
 }
