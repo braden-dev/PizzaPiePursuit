@@ -70,7 +70,7 @@ public class ParkourController : MonoBehaviour
             //}
         //}
 
-        if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyDown(KeyCode.LeftShift) && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion") && playerController.IsGrounded)
+        if (!playerController.IsOnLedge && environmentScanner.ClearPathSlideCheck() && Input.GetKeyDown(KeyCode.LeftShift) && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion") && playerController.IsGrounded)
         {
             StartCoroutine(DoParkourAction(parkourActions[4], 3.0f));
         }

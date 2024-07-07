@@ -8,7 +8,7 @@ public class EnvironmentScanner : MonoBehaviour
     private Vector3 forwardRayOffset = new Vector3(0, 0.25f, 0);
     private float forwardRayLength = 0.8f;
     private float heightRayLength = 5;
-    private float ledgeRayLength = 10;
+    private float ledgeRayLength = 5000;
     private LayerMask obstacleLayer;
     private string obstacleLayerName = "Obstacles";
     private float ledgeHeightThreshold = 0.75f;
