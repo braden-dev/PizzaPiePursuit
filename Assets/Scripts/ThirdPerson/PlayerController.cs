@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private LayerMask groundLayer;
     private string groundLayerName = "Obstacles";
 
+    private float autoDropHeightLimit = 2f;
+    private bool guardRailsOn = false;
+
     private bool isGrounded;
 	public bool IsGrounded => isGrounded;
     private bool hasControl = true;
@@ -69,7 +72,11 @@ public class PlayerController : MonoBehaviour
             if (IsOnLedge)
             {
                 LedgeData = ledgeData;
-                LedgeMovement();
+                if (guardRailsOn)
+                {
+                    LedgeMovement();
+                }
+                
             }
 
             animator.SetFloat("moveAmount", velocity.magnitude / moveSpeed, 0.2f, Time.deltaTime);
@@ -78,7 +85,7 @@ public class PlayerController : MonoBehaviour
         {
             ySpeed += Physics.gravity.y * Time.deltaTime;
 
-            velocity = transform.forward * moveSpeed / 2;
+            velocity = transform.forward * moveSpeed / 4;
         }
 
         
@@ -107,27 +114,31 @@ public class PlayerController : MonoBehaviour
         float signedAngle = Vector3.SignedAngle(LedgeData.surfaceHit.normal, desiredMoveDir, Vector3.up);
         float angle = Mathf.Abs(signedAngle);
 
-        if (Vector3.Angle(desiredMoveDir, transform.forward) >= 80)
+        if (LedgeData.height > autoDropHeightLimit)
         {
-            // Don't move, but rotate
-            velocity = Vector3.zero;
-            return;
-        }
 
-        if (angle < 60)
-        {
-            velocity = Vector3.zero;
-            moveDir = Vector3.zero;
-        }
-        else if (angle < 90)
-        {
-            // Angle is b/w 60 and 90, so limit the velocity to horizontal direction
+            if (Vector3.Angle(desiredMoveDir, transform.forward) >= 80)
+            {
+                // Don't move, but rotate
+                velocity = Vector3.zero;
+                return;
+            }
 
-            var left = Vector3.Cross(Vector3.up, LedgeData.surfaceHit.normal);
-            var dir = left * Mathf.Sign(signedAngle);
+            if (angle < 60)
+            {
+                velocity = Vector3.zero;
+                moveDir = Vector3.zero;
+            }
+            else if (angle < 90)
+            {
+                // Angle is b/w 60 and 90, so limit the velocity to horizontal direction
 
-            velocity = velocity.magnitude * dir;
-            moveDir = dir;
+                var left = Vector3.Cross(Vector3.up, LedgeData.surfaceHit.normal);
+                var dir = left * Mathf.Sign(signedAngle);
+
+                velocity = velocity.magnitude * dir;
+                moveDir = dir;
+            }
         }
     }
 
