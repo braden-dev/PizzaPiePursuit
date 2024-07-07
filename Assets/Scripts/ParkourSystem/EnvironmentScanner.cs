@@ -5,21 +5,27 @@ using UnityEngine;
 
 public class EnvironmentScanner : MonoBehaviour
 {
-    [SerializeField] Vector3 forwardRayOffset = new Vector3(0, 2.5f, 0);
-    [SerializeField] float forwardRayLength = 0.8f;
-    [SerializeField] float heightRayLength = 5;
-    [SerializeField] float ledgeRayLength = 10;
-    [SerializeField] LayerMask obstacleLayer;
-    [SerializeField] float ledgeHeightThreshold = 0.75f;
+    private Vector3 forwardRayOffset = new Vector3(0, 0.25f, 0);
+    private float forwardRayLength = 0.8f;
+    private float heightRayLength = 5;
+    private float ledgeRayLength = 10;
+    private LayerMask obstacleLayer;
+    private string obstacleLayerName = "Obstacles";
+    private float ledgeHeightThreshold = 0.75f;
 
-    [SerializeField] Vector3 forwardRayOffsetJumpMax = new Vector3(0, 1.75f, 0);
-    [SerializeField] Vector3 forwardRayOffsetJumpMid = new Vector3(0, 1.0f, 0);
-    [SerializeField] Vector3 forwardRayOffsetJumpMin = new Vector3(0, 0.2f, 0);
-    [SerializeField] float forwardRayLengthJump = 2.75f;
-    [SerializeField] Vector3 forwardRayOffsetSlideMax = new Vector3(0, 0.75f, 0);
-    [SerializeField] Vector3 forwardRayOffsetSlideMid = new Vector3(0, 0.4f, 0);
-    [SerializeField] Vector3 forwardRayOffsetSlideMin = new Vector3(0, 0.1f, 0);
-    [SerializeField] float forwardRayLengthSlide = 5.5f;
+    private Vector3 forwardRayOffsetJumpMax = new Vector3(0, 1.75f, 0);
+    private Vector3 forwardRayOffsetJumpMid = new Vector3(0, 1.0f, 0);
+    private Vector3 forwardRayOffsetJumpMin = new Vector3(0, 0.2f, 0);
+    private float forwardRayLengthJump = 5.5f;
+    private Vector3 forwardRayOffsetSlideMax = new Vector3(0, 0.75f, 0);
+    private Vector3 forwardRayOffsetSlideMid = new Vector3(0, 0.4f, 0);
+    private Vector3 forwardRayOffsetSlideMin = new Vector3(0, 0.1f, 0);
+    private float forwardRayLengthSlide = 5.5f;
+
+    private void Awake()
+    {
+        obstacleLayer = LayerMask.GetMask(obstacleLayerName);
+    }
 
     public ObstacleHitData ObstacleCheck()
     {

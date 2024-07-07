@@ -6,7 +6,7 @@ public class ParkourController : MonoBehaviour
 {
     [SerializeField] List<ParkourAction> parkourActions;
     [SerializeField] ParkourAction jumpDownAction;
-    [SerializeField] float autoDropHeightLimit = 1f;
+    //[SerializeField] float autoDropHeightLimit = 1f;
 
     bool inAction = false;
 
@@ -16,6 +16,8 @@ public class ParkourController : MonoBehaviour
     Animator animator;
     PlayerController playerController;
     Rigidbody rb;
+
+    //int inAirCounter = 0;
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class ParkourController : MonoBehaviour
     {
         var hitData = environmentScanner.ObstacleCheck();
 
-        if (Input.GetKeyDown(KeyCode.Space) && !inAction)
+        if (Input.GetKeyDown(KeyCode.Space) && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
         {
             // // Then check for ledge jump if on a ledge
             // else if (playerController.IsOnLedge && ledgeJumpAction.CheckIfPossible(hitData, transform))
@@ -49,28 +51,51 @@ public class ParkourController : MonoBehaviour
             }
         }
         
-        if (playerController.IsOnLedge && !inAction && !hitData.forwardHitFound)
-        {
-            bool shouldJump = true;
-            if (playerController.LedgeData.height > autoDropHeightLimit && !Input.GetKeyUp(KeyCode.Space))
-                shouldJump = false;
+        //if (playerController.IsOnLedge && !inAction && !hitData.forwardHitFound)
+        //{
+            //if ((playerController.LedgeData.height <= autoDropHeightLimit || Input.GetKeyDown(KeyCode.Q)) && playerController.LedgeData.angle <= 50)
+            //{
+            //    playerController.IsOnLedge = false;
+            //    StartCoroutine(DoParkourAction(jumpDownAction, 0.5f));
+            //}
 
-            if (shouldJump && playerController.LedgeData.angle <= 50)
-            {
-                playerController.IsOnLedge = false;
-                StartCoroutine(DoParkourAction(jumpDownAction, 0.5f));
-            }
-        }
+            //bool shouldJump = true;
+            //if (playerController.LedgeData.height > autoDropHeightLimit && !Input.GetKeyDown(KeyCode.Q))
+            //    shouldJump = false;
 
-        if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyDown(KeyCode.LeftShift) && !inAction && playerController.IsGrounded)
+            //if (shouldJump && playerController.LedgeData.angle <= 50)
+            //{
+            //    playerController.IsOnLedge = false;
+            //    StartCoroutine(DoParkourAction(jumpDownAction, 0.5f));
+            //}
+        //}
+
+        if (environmentScanner.ClearPathSlideCheck() && Input.GetKeyDown(KeyCode.LeftShift) && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion") && playerController.IsGrounded)
         {
             StartCoroutine(DoParkourAction(parkourActions[4], 3.0f));
         }
 
-        if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded && Input.GetKeyDown(KeyCode.Space) && !inAction)
+        if (environmentScanner.ClearPathJumpCheck() && !hitData.forwardHitFound && playerController.IsGrounded && Input.GetKeyDown(KeyCode.Space) && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
         {
             StartCoroutine(DoParkourAction(parkourActions[5], 3.0f));
         }
+
+        //if (!playerController.IsGrounded && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+        //{
+            //playerController.SetControl(false);
+            //inAirCounter += 1;
+            //if (inAirCounter > 100)
+            //{
+            //    StartCoroutine(DoParkourAction(jumpDownAction, 0.5f));
+            //}
+        //}
+        //else
+        //{
+            //inAirCounter = 0;
+            //playerController.SetControl(true);
+        //}
+        //Debug.Log(playerController.IsGrounded);
+        //Debug.Log(inAction);
 
     }
 
