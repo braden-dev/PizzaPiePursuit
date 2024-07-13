@@ -12,7 +12,7 @@ public class GameControls : MonoBehaviour
     [Header("Game Variables")]
     public string sceneName = "Tutorial";
     public float maxTimer = 500f;
-    private float timer = 500f;
+    public float timer = 500f;
     public float timerRate = 0.01f;
     private float currentRate = 0.0f;
     bool gamePaused = true;
