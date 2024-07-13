@@ -69,6 +69,11 @@ public class ButtonHelperFunctions : MonoBehaviour
         StartCoroutine(PlayClickSoundAndWait(gameControls.StartLevel2));
     }
 
+    public void StartLevel3()
+    {
+        StartCoroutine(PlayClickSoundAndWait(gameControls.StartLevel3));
+    }
+
     public void LevelSelectMenu()
     {
         StartCoroutine(PlayClickSoundAndWait(gameControls.LevelSelectMenu));
