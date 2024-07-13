@@ -18,6 +18,8 @@ public class DroneShooting : MonoBehaviour
     private Vector3 previousPlayerPosition;
     private Vector3 playerVelocity;
 
+    private float predictionInaccuracy = 1f;
+
     public AudioSource laserBulletSound;
 
     void Start()
@@ -38,7 +40,9 @@ public class DroneShooting : MonoBehaviour
         playerVelocity = (playerTransform.position - previousPlayerPosition) / Time.deltaTime;
         previousPlayerPosition = playerTransform.position;
 
-        if (droneMovement.droneState == DroneMovement.DroneState.Chase && CanSeePlayer(sightRange))
+        PlayerHealthManager playerHealth = playerTransform.GetComponent<PlayerHealthManager>();
+
+        if (droneMovement.droneState == DroneMovement.DroneState.Chase && CanSeePlayer(sightRange) && playerHealth != null && !playerHealth.IsInvulnerable())
         {
             if (Time.time > nextFireTime)
             {
@@ -78,13 +82,21 @@ public class DroneShooting : MonoBehaviour
         float distance = toPlayer.magnitude;
         float timeToReach = distance / laserSpeed;
 
+        Vector3 randomOffset = new Vector3(
+            Random.Range(-predictionInaccuracy, predictionInaccuracy),
+            Random.Range(-predictionInaccuracy, predictionInaccuracy),
+            Random.Range(-predictionInaccuracy, predictionInaccuracy)
+        );
+
         // If the player is not moving, predict future position as the current position
         if (playerVelocity.magnitude < 0.1f)
         {
-            return playerChestPosition;
+            return playerChestPosition + randomOffset;
         }
 
-        return playerChestPosition + playerVelocity * timeToReach;
+        Vector3 predictedPosition = playerChestPosition + playerVelocity * timeToReach;
+
+        return predictedPosition + randomOffset;
     }
 
     public bool CanSeePlayer(float sightRange)
@@ -109,4 +121,12 @@ public class DroneShooting : MonoBehaviour
         }
         return false;
     }
+
+    public void ResetFireTime()
+    {
+        // Introduce a longer lag by adding a fixed delay or a larger random range
+        float delay = 4.0f; 
+        nextFireTime = Time.time + delay + Random.Range(0.5f, 1.5f); // Adding randomness if needed
+    }
+
 }
