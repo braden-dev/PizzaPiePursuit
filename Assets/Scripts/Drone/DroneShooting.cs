@@ -18,6 +18,8 @@ public class DroneShooting : MonoBehaviour
     private Vector3 previousPlayerPosition;
     private Vector3 playerVelocity;
 
+    private float predictionInaccuracy = 1f;
+
     public AudioSource laserBulletSound;
 
     void Start()
@@ -80,13 +82,21 @@ public class DroneShooting : MonoBehaviour
         float distance = toPlayer.magnitude;
         float timeToReach = distance / laserSpeed;
 
+        Vector3 randomOffset = new Vector3(
+            Random.Range(-predictionInaccuracy, predictionInaccuracy),
+            Random.Range(-predictionInaccuracy, predictionInaccuracy),
+            Random.Range(-predictionInaccuracy, predictionInaccuracy)
+        );
+
         // If the player is not moving, predict future position as the current position
         if (playerVelocity.magnitude < 0.1f)
         {
-            return playerChestPosition;
+            return playerChestPosition + randomOffset;
         }
 
-        return playerChestPosition + playerVelocity * timeToReach;
+        Vector3 predictedPosition = playerChestPosition + playerVelocity * timeToReach;
+
+        return predictedPosition + randomOffset;
     }
 
     public bool CanSeePlayer(float sightRange)
