@@ -38,7 +38,9 @@ public class DroneShooting : MonoBehaviour
         playerVelocity = (playerTransform.position - previousPlayerPosition) / Time.deltaTime;
         previousPlayerPosition = playerTransform.position;
 
-        if (droneMovement.droneState == DroneMovement.DroneState.Chase && CanSeePlayer(sightRange))
+        PlayerHealthManager playerHealth = playerTransform.GetComponent<PlayerHealthManager>();
+
+        if (droneMovement.droneState == DroneMovement.DroneState.Chase && CanSeePlayer(sightRange) && playerHealth != null && !playerHealth.IsInvulnerable())
         {
             if (Time.time > nextFireTime)
             {
@@ -109,4 +111,12 @@ public class DroneShooting : MonoBehaviour
         }
         return false;
     }
+
+    public void ResetFireTime()
+    {
+        // Introduce a longer lag by adding a fixed delay or a larger random range
+        float delay = 4.0f; 
+        nextFireTime = Time.time + delay + Random.Range(0.5f, 1.5f); // Adding randomness if needed
+    }
+
 }

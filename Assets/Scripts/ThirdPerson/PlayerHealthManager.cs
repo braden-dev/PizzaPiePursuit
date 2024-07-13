@@ -77,4 +77,14 @@ public class PlayerHealthManager : MonoBehaviour
             healthCollectableSound.Play();
         }
     }
+
+    public void SetInvulnerability(bool state)
+    {
+        isInvulnerable = state;
+    }
+
+    public bool IsInvulnerable()
+    {
+        return isInvulnerable;
+    }
 }
