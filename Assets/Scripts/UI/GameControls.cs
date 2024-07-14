@@ -62,6 +62,14 @@ public class GameControls : MonoBehaviour
     public GameObject startLevelMenu;
     CanvasGroup startLevelMenuCanvasGroup;
     bool startLevelMenuShowing = false;
+    public TextMeshProUGUI delivery1ButtonText;
+    public TextMeshProUGUI delivery2ButtonText;
+    public TextMeshProUGUI delivery3ButtonText;
+    public TextMeshProUGUI delivery1BestTimeText;
+    public TextMeshProUGUI delivery2BestTimeText;
+    public TextMeshProUGUI delivery3BestTimeText;
+    private float lastShowStartLevelMenuTime = -1f;
+    private const float showStartLevelMenuCooldown = 1.0f;
 
     [Header("Miscellaneous Variables")]
     private MissionController missionController;
@@ -349,8 +357,53 @@ public class GameControls : MonoBehaviour
 
     public void ShowStartLevelMenu()
     {
+        if (Time.time - lastShowStartLevelMenuTime < showStartLevelMenuCooldown)
+        {
+            return;
+        }
+
+        lastShowStartLevelMenuTime = Time.time;
+
         if (missionController.GetIsInMission() == false)
         {
+            if (missionController.GetMission1Complete())
+                delivery1ButtonText.text = "Delivery #1 (Complete)";
+            else
+                delivery1ButtonText.text = "Delivery #1";
+            if (missionController.GetMission2Complete())
+                delivery2ButtonText.text = "Delivery #2 (Complete)";
+            else
+                delivery2ButtonText.text = "Delivery #2";
+            if (missionController.GetMission3Complete())
+                delivery3ButtonText.text = "Delivery #3 (Complete)";
+            else
+                delivery3ButtonText.text = "Delivery #3";
+
+            if (missionController.GetMission1BestTime() == 1000.0f)
+                delivery1BestTimeText.text = "N/A";
+            else
+            {
+                float delivery1BestTime = missionController.GetMission1BestTime();
+                string formattedString = string.Format("{0:F3}s", delivery1BestTime);
+                delivery1BestTimeText.text = formattedString;
+            }
+            if (missionController.GetMission2BestTime() == 1000.0f)
+                delivery2BestTimeText.text = "N/A";
+            else
+            {
+                float delivery2BestTime = missionController.GetMission2BestTime();
+                string formattedString = string.Format("{0:F3}s", delivery2BestTime);
+                delivery2BestTimeText.text = formattedString;
+            }
+            if (missionController.GetMission3BestTime() == 1000.0f)
+                delivery3BestTimeText.text = "N/A";
+            else
+            {
+                float delivery3BestTime = missionController.GetMission3BestTime();
+                string formattedString = string.Format("{0:F3}s", delivery3BestTime);
+                delivery3BestTimeText.text = formattedString;
+            }
+
             ShowCanvas(startLevelMenuCanvasGroup);
             startLevelMenuShowing = true;
             PauseGameplayShort();
