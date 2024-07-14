@@ -17,6 +17,8 @@ public class ParkourController : MonoBehaviour
     PlayerController playerController;
     Rigidbody rb;
 
+    public bool requireInputForActions = false;
+
     //int inAirCounter = 0;
 
     private void Awake()
@@ -31,25 +33,13 @@ public class ParkourController : MonoBehaviour
     {
         var hitData = environmentScanner.ObstacleCheck();
 
-        if (Input.GetKeyDown(KeyCode.Space) && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+        if (requireInputForActions)
         {
-            // // Then check for ledge jump if on a ledge
-            // else if (playerController.IsOnLedge && ledgeJumpAction.CheckIfPossible(hitData, transform))
-            // {
-            //     StartCoroutine(DoParkourAction(ledgeJumpAction));
-            // }
-            if (hitData.forwardHitFound)
-            {
-                foreach (var action in parkourActions)
-                {
-                    if (action.CheckIfPossible(hitData, transform))
-                    {
-                        StartCoroutine(DoParkourAction(action, 0.5f));
-                        break;
-                    }
-                }
-            }
+            if (Input.GetKeyDown(KeyCode.Space))
+                PerformParkourActions(hitData);
         }
+        else
+            PerformParkourActions(hitData);
         
         //if (playerController.IsOnLedge && !inAction && !hitData.forwardHitFound)
         //{
@@ -97,6 +87,29 @@ public class ParkourController : MonoBehaviour
         //Debug.Log(playerController.IsGrounded);
         //Debug.Log(inAction);
 
+    }
+
+    void PerformParkourActions(EnvironmentScanner.ObstacleHitData hitData)
+    {
+        if (!inAction && animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+        {
+            // // Then check for ledge jump if on a ledge
+            // else if (playerController.IsOnLedge && ledgeJumpAction.CheckIfPossible(hitData, transform))
+            // {
+            //     StartCoroutine(DoParkourAction(ledgeJumpAction));
+            // }
+            if (hitData.forwardHitFound)
+            {
+                foreach (var action in parkourActions)
+                {
+                    if (action.CheckIfPossible(hitData, transform))
+                    {
+                        StartCoroutine(DoParkourAction(action, 0.5f));
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     IEnumerator DoParkourAction(ParkourAction action, float timer_value)

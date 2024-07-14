@@ -9,6 +9,7 @@ public class DeliveryLocation : MonoBehaviour
     public GameObject emissiveLightObjMission1;
     public GameObject emissiveLightObjMission2;
     public GameObject emissiveLightObjMission3;
+    public GameObject emissiveLightObjMission4;
     public MissionController missionController;
 
     private int missionId;
@@ -22,6 +23,7 @@ public class DeliveryLocation : MonoBehaviour
         emissiveLightObjMission1.SetActive(false);
         emissiveLightObjMission2.SetActive(false);
         emissiveLightObjMission3.SetActive(false);
+        emissiveLightObjMission4.SetActive(false);
 
         if (gameControls == null)
         {
@@ -47,6 +49,10 @@ public class DeliveryLocation : MonoBehaviour
         {
             Debug.LogError("Emmisive Light C not found in the scene.");
         }
+        if (emissiveLightObjMission4 == null)
+        {
+            Debug.LogError("Emmisive Light D not found in the scene.");
+        }
     }
 
     private void Update()
@@ -66,6 +72,9 @@ public class DeliveryLocation : MonoBehaviour
                 case 3:
                     emissiveLightObjMission3.SetActive(true);
                     break;
+                case 4:
+                    emissiveLightObjMission4.SetActive(true);
+                    break;
                 default:
                     break;
             }
@@ -75,6 +84,7 @@ public class DeliveryLocation : MonoBehaviour
             emissiveLightObjMission1.SetActive(false);
             emissiveLightObjMission2.SetActive(false);
             emissiveLightObjMission3.SetActive(false);
+            emissiveLightObjMission4.SetActive(false);
         }
     }
 
@@ -116,6 +126,18 @@ public class DeliveryLocation : MonoBehaviour
                         winSound.Play();
                     }
                     missionController.SetMissionComplete(3, gameControls.maxTimer - gameControls.timer);
+                    gameControls.ShowWinMenu();
+                }
+            }
+            else if (gameObject.name == "DeliveryFlyingCarA" && missionController.GetMissionId() == 4)
+            {
+                if (other.CompareTag("Player"))
+                {
+                    if (winSound != null)
+                    {
+                        winSound.Play();
+                    }
+                    missionController.SetMissionComplete(4, gameControls.maxTimer - gameControls.timer);
                     gameControls.ShowWinMenu();
                 }
             }
