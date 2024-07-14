@@ -90,6 +90,8 @@ public class DeliveryLocation : MonoBehaviour
                     {
                         winSound.Play();
                     }
+                    Debug.Log("Time Left: " + gameControls.timer);
+                    missionController.SetMissionComplete(1, gameControls.maxTimer - gameControls.timer);
                     gameControls.ShowWinMenu();
                 }
             }
@@ -101,6 +103,7 @@ public class DeliveryLocation : MonoBehaviour
                     {
                         winSound.Play();
                     }
+                    missionController.SetMissionComplete(2, gameControls.maxTimer - gameControls.timer);
                     gameControls.ShowWinMenu();
                 }
             }
@@ -112,6 +115,7 @@ public class DeliveryLocation : MonoBehaviour
                     {
                         winSound.Play();
                     }
+                    missionController.SetMissionComplete(3, gameControls.maxTimer - gameControls.timer);
                     gameControls.ShowWinMenu();
                 }
             }
