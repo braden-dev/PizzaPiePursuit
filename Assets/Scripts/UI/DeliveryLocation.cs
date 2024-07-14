@@ -90,7 +90,7 @@ public class DeliveryLocation : MonoBehaviour
                     {
                         winSound.Play();
                     }
-                    Debug.Log("Time Left: " + gameControls.timer);
+                    //Debug.Log("Time Left: " + gameControls.timer);
                     missionController.SetMissionComplete(1, gameControls.maxTimer - gameControls.timer);
                     gameControls.ShowWinMenu();
                 }
