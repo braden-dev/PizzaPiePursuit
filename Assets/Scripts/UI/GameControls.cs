@@ -12,7 +12,7 @@ public class GameControls : MonoBehaviour
     [Header("Game Variables")]
     public string sceneName = "Tutorial";
     public float maxTimer = 500f;
-    private float timer = 500f;
+    public float timer = 500f;
     public float timerRate = 0.01f;
     private float currentRate = 0.0f;
     bool gamePaused = true;
@@ -285,17 +285,29 @@ public class GameControls : MonoBehaviour
 
     public void StartLevel1()
     {
-        //SceneManager.LoadScene(level1SceneName);
         HideStartLevelMenu();
         ShowCanvas(hudCanvasGroup);
-        missionController.SetIsInMission(true);
+        missionController.SetIsInMission(true, 1);
         timer = maxTimer;
         currentRate = timerRate;
     }
 
     public void StartLevel2()
     {
-        SceneManager.LoadScene(level2SceneName);
+        HideStartLevelMenu();
+        ShowCanvas(hudCanvasGroup);
+        missionController.SetIsInMission(true, 2);
+        timer = maxTimer;
+        currentRate = timerRate;
+    }
+
+    public void StartLevel3()
+    {
+        HideStartLevelMenu();
+        ShowCanvas(hudCanvasGroup);
+        missionController.SetIsInMission(true, 3);
+        timer = maxTimer;
+        currentRate = timerRate;
     }
 
     public void RestartCurrentLevel()
@@ -332,7 +344,7 @@ public class GameControls : MonoBehaviour
         ShowCanvas(winMenuCanvasGroup);
         winMenuShowing = true;
         PauseGameplayShort();
-        missionController.SetIsInMission(false);
+        missionController.SetIsInMission(false, -1);
     }
 
     public void ShowStartLevelMenu()
