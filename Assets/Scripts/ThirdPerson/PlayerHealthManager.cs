@@ -45,13 +45,13 @@ public class PlayerHealthManager : MonoBehaviour
 
     private IEnumerator HandleDamage()
     {
-        Debug.Log("Player health before damage: " + playerHealth);
+        //Debug.Log("Player health before damage: " + playerHealth);
         playerHealth -= 1;
         if (damageSound != null)
         {
             damageSound.Play();
         }
-        Debug.Log("Player health after damage: " + playerHealth);
+        //Debug.Log("Player health after damage: " + playerHealth);
 
         isInvulnerable = true;
         yield return new WaitForSeconds(invulnerabilityDuration);

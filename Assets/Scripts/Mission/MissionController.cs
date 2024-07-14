@@ -47,7 +47,7 @@ public class MissionController : MonoBehaviour
                 if(missionCompletionTime < mission1BestTime)
                 {
                     mission1BestTime = missionCompletionTime;
-                    Debug.Log("New best time: " + mission1BestTime);
+                    //Debug.Log("New best time: " + mission1BestTime);
                 }
                 break;
             case (2):
