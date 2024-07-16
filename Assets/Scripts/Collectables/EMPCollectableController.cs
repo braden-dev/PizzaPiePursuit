@@ -31,7 +31,7 @@ public class EMPCollectableController : MonoBehaviour
             if (playerEMPManager.GetEMPCharges() < 3)
             {
                 playerEMPManager.AddEMPCharge();
-                Debug.Log("Emp Charges: " + playerEMPManager.GetEMPCharges());
+                //Debug.Log("Emp Charges: " + playerEMPManager.GetEMPCharges());
 
                 Destroy(gameObject);
             }

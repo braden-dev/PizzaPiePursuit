@@ -11,13 +11,13 @@ public class FlyingCarMovement : MonoBehaviour
     public float waypointThreshold = 1.0f; // Distance to waypoint to consider it reached
 
     [Header("Movement Settings")]
-    public float moveSpeed = 3.0f; // Speed of the drone's forward movement 
+    public float moveSpeed = 8.0f; // Speed of the drone's forward movement 
     public float rotationSpeed = 2.0f; // Speed of rotation towards the target 
     private List<Vector3> smoothedWaypoints; // List of smoothed waypoints
     private int currentSmoothedIndex = 0; // Index of the current smoothed waypoint
 
     public GameObject flyingCarLandingSpot;
-    public float goToLandingSpotChance = 0.05f;
+    public float goToLandingSpotChance = 0.01f;
     private bool isLanding = false;
 
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class FlyingCarMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waypoints.Length == 0)
+        if (waypoints == null || waypoints.Length == 0)
         {
             Debug.LogError("No waypoints set for the drone.");
             return;

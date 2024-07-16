@@ -4923,4 +4923,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0196440e170e9419a4cb1702510c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stunDuration: 5
+  stunDuration: 2.5

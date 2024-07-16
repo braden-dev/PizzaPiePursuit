@@ -113,6 +113,7 @@ public class DroneMovement : MonoBehaviour
             case DroneState.Stunned:
                 if (Time.time >= stunEndTime)
                 {
+                    Debug.Log("Ending stun at time: " + Time.time);
                     droneState = DroneState.Patrol;
                     stunParticles.SetActive(false);
                     stunSound.Stop();
@@ -541,6 +542,9 @@ public class DroneMovement : MonoBehaviour
 
     public void Stun(float stunDuration)
     {
+        Debug.Log("Stun duration: " + stunDuration);
+        Debug.Log("Time.time: " + Time.time);
+        Debug.Log("Stun End Time: " + Time.time + stunDuration);
         droneState = DroneState.Stunned;
         stunEndTime = Time.time + stunDuration;
         stunParticles.SetActive(true);
