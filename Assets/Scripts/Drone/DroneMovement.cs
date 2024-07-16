@@ -50,11 +50,17 @@ public class DroneMovement : MonoBehaviour
     private float searchTimer = 0.0f;
     private Quaternion initialRotation;
 
+    [Header("Stunned Settings")]
+    private float stunEndTime = 0.0f;
+    public GameObject stunParticles;
+    public AudioSource stunSound;
+
     public enum DroneState
     {
         Patrol,
         Chase,
-        Search
+        Search,
+        Stunned
     };
 
     public DroneState droneState;
@@ -103,6 +109,14 @@ public class DroneMovement : MonoBehaviour
             case DroneState.Search:
                 //Debug.Log("Searching for player");
                 SearchForPlayer();
+                break;
+            case DroneState.Stunned:
+                if (Time.time >= stunEndTime)
+                {
+                    droneState = DroneState.Patrol;
+                    stunParticles.SetActive(false);
+                    stunSound.Stop();
+                }
                 break;
             default:
                 break;
@@ -523,5 +537,14 @@ public class DroneMovement : MonoBehaviour
         {
             avoidingObstacle = false;
         }
+    }
+
+    public void Stun(float stunDuration)
+    {
+        droneState = DroneState.Stunned;
+        stunEndTime = Time.time + stunDuration;
+        stunParticles.SetActive(true);
+        stunSound.Play();
+        Debug.Log("Drone is stunned for " + stunDuration + " seconds.");
     }
 }

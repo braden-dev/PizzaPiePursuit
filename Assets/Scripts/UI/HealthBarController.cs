@@ -11,10 +11,10 @@ public class HealthBarController : MonoBehaviour
 
     void Start()
     {
-        if (healthBar == null)
-        {
-            Debug.LogError("Health bar image is not set.");
-        }
+        //if (healthBar == null)
+        //{
+        //    Debug.LogError("Health bar image is not set.");
+        //}
         if (playerHealthManager == null)
         {
             Debug.LogError("PlayerHealthManager is not set.");
