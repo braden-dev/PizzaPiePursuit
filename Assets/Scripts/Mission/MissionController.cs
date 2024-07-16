@@ -10,10 +10,12 @@ public class MissionController : MonoBehaviour
     private static bool mission1Complete = false;
     private static bool mission2Complete = false;
     private static bool mission3Complete = false;
+    private static bool mission4Complete = false;
 
     private static float mission1BestTime = 1000.0f;
     private static float mission2BestTime = 1000.0f;
     private static float mission3BestTime = 1000.0f;
+    private static float mission4BestTime = 1000.0f;
 
 
     public void SetIsInMission(bool b, int i)
@@ -64,6 +66,13 @@ public class MissionController : MonoBehaviour
                     mission3BestTime = missionCompletionTime;
                 }
                 break;
+            case (4):
+                mission4Complete = true;
+                if (missionCompletionTime < mission4BestTime)
+                {
+                    mission4BestTime = missionCompletionTime;
+                }
+                break;
             default:
                 break;
         }
@@ -97,5 +106,15 @@ public class MissionController : MonoBehaviour
     public float GetMission3BestTime()
     {
         return mission3BestTime;
+    }
+
+    public bool GetMission4Complete()
+    {
+        return mission4Complete;
+    }
+
+    public float GetMission4BestTime()
+    {
+        return mission4BestTime;
     }
 }

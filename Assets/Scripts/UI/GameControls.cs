@@ -65,9 +65,11 @@ public class GameControls : MonoBehaviour
     public TextMeshProUGUI delivery1ButtonText;
     public TextMeshProUGUI delivery2ButtonText;
     public TextMeshProUGUI delivery3ButtonText;
+    public TextMeshProUGUI delivery4ButtonText;
     public TextMeshProUGUI delivery1BestTimeText;
     public TextMeshProUGUI delivery2BestTimeText;
     public TextMeshProUGUI delivery3BestTimeText;
+    public TextMeshProUGUI delivery4BestTimeText;
     private float lastShowStartLevelMenuTime = -1f;
     private const float showStartLevelMenuCooldown = 1.0f;
 
@@ -318,6 +320,15 @@ public class GameControls : MonoBehaviour
         currentRate = timerRate;
     }
 
+    public void StartLevel4()
+    {
+        HideStartLevelMenu();
+        ShowCanvas(hudCanvasGroup);
+        missionController.SetIsInMission(true, 4);
+        timer = maxTimer;
+        currentRate = timerRate;
+    }
+
     public void RestartCurrentLevel()
     {
         
@@ -378,6 +389,10 @@ public class GameControls : MonoBehaviour
                 delivery3ButtonText.text = "Delivery #3 (Complete)";
             else
                 delivery3ButtonText.text = "Delivery #3";
+            if (missionController.GetMission4Complete())
+                delivery4ButtonText.text = "Delivery #4 (Complete)";
+            else
+                delivery4ButtonText.text = "Delivery #4";
 
             if (missionController.GetMission1BestTime() == 1000.0f)
                 delivery1BestTimeText.text = "N/A";
@@ -402,6 +417,14 @@ public class GameControls : MonoBehaviour
                 float delivery3BestTime = missionController.GetMission3BestTime();
                 string formattedString = string.Format("{0:F3}s", delivery3BestTime);
                 delivery3BestTimeText.text = formattedString;
+            }
+            if (missionController.GetMission4BestTime() == 1000.0f)
+                delivery4BestTimeText.text = "N/A";
+            else
+            {
+                float delivery4BestTime = missionController.GetMission4BestTime();
+                string formattedString = string.Format("{0:F3}s", delivery4BestTime);
+                delivery4BestTimeText.text = formattedString;
             }
 
             ShowCanvas(startLevelMenuCanvasGroup);
