@@ -19088,7 +19088,7 @@ MonoBehaviour:
   emissiveLightObjMission2: {fileID: 1615587867}
   emissiveLightObjMission3: {fileID: 1108585605}
   emissiveLightObjMission4: {fileID: 1728163659}
-  pizzaShopLight: {fileID: 0}
+  pizzaShopLight: {fileID: 396899917}
   missionController: {fileID: 810875278}
   winSound: {fileID: 0}
 --- !u!1001 &993538398
@@ -21069,7 +21069,7 @@ MonoBehaviour:
   emissiveLightObjMission2: {fileID: 1615587867}
   emissiveLightObjMission3: {fileID: 1108585605}
   emissiveLightObjMission4: {fileID: 1728163659}
-  pizzaShopLight: {fileID: 0}
+  pizzaShopLight: {fileID: 396899917}
   missionController: {fileID: 810875278}
   winSound: {fileID: 0}
 --- !u!65 &1095243158
@@ -30879,7 +30879,7 @@ MonoBehaviour:
   emissiveLightObjMission2: {fileID: 1615587867}
   emissiveLightObjMission3: {fileID: 1108585605}
   emissiveLightObjMission4: {fileID: 1728163659}
-  pizzaShopLight: {fileID: 0}
+  pizzaShopLight: {fileID: 396899917}
   missionController: {fileID: 810875278}
   winSound: {fileID: 0}
 --- !u!136 &1562444829
@@ -42062,7 +42062,7 @@ MonoBehaviour:
   emissiveLightObjMission2: {fileID: 1615587867}
   emissiveLightObjMission3: {fileID: 1108585605}
   emissiveLightObjMission4: {fileID: 1728163659}
-  pizzaShopLight: {fileID: 0}
+  pizzaShopLight: {fileID: 396899917}
   missionController: {fileID: 810875278}
   winSound: {fileID: 0}
 --- !u!82 &1955723982
@@ -46642,6 +46642,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 552793978373166771, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
+      propertyPath: gameControls
+      value: 
+      objectReference: {fileID: 1965634155}
+    - target: {fileID: 552793978373166771, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
       propertyPath: aoeSpherePrefab
       value: 
       objectReference: {fileID: 3647050291072920698, guid: a431ab7c7e164e7478287227ca411cb1, type: 3}
@@ -46649,6 +46653,10 @@ PrefabInstance:
       propertyPath: collectableSound
       value: 
       objectReference: {fileID: 810875279}
+    - target: {fileID: 552793978373166771, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
+      propertyPath: missionController
+      value: 
+      objectReference: {fileID: 810875278}
     - target: {fileID: 552793978373166771, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
       propertyPath: empChargeContainer
       value: 

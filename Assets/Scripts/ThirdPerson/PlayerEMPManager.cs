@@ -11,6 +11,8 @@ public class PlayerEMPManager : MonoBehaviour
     public GameObject empChargeCirclePrefab;
     public GameObject aoeSpherePrefab;
     public AudioSource empBlastSound;
+    public GameControls gameControls;
+    public MissionController missionController;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +70,8 @@ public class PlayerEMPManager : MonoBehaviour
             UpdateEMPChargeUI();
             empBlastSound.Play();
             TriggerAOEEffect();
+            if(missionController.GetIsInMission())
+                gameControls.timer -= 5;
         }
     }
 
