@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MissionController : MonoBehaviour
@@ -17,17 +18,23 @@ public class MissionController : MonoBehaviour
     private static float mission3BestTime = 1000.0f;
     private static float mission4BestTime = 1000.0f;
 
+    public TextMeshProUGUI activeMissionDisplayText;
+
+    private void Update()
+    {
+        if (missionId == -1)
+            activeMissionDisplayText.text = "No Delivery Active";
+    }
 
     public void SetIsInMission(bool b, int i)
     {
         isInMission = b;
         missionId = i;
-        //Debug.Log("isInMission SET: " + isInMission);
+        activeMissionDisplayText.text = "Delivery #" + i;
     }
 
     public bool GetIsInMission()
     {
-        //Debug.Log("isInMission GET: " + isInMission);
         return isInMission;
     }
 

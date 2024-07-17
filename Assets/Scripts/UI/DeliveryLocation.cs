@@ -10,6 +10,7 @@ public class DeliveryLocation : MonoBehaviour
     public GameObject emissiveLightObjMission2;
     public GameObject emissiveLightObjMission3;
     public GameObject emissiveLightObjMission4;
+    public GameObject pizzaShopLight;
     public MissionController missionController;
 
     private int missionId;
@@ -20,6 +21,7 @@ public class DeliveryLocation : MonoBehaviour
     {
         gameControls = FindObjectOfType<GameControls>();
 
+        pizzaShopLight.SetActive(true);
         emissiveLightObjMission1.SetActive(false);
         emissiveLightObjMission2.SetActive(false);
         emissiveLightObjMission3.SetActive(false);
@@ -53,6 +55,10 @@ public class DeliveryLocation : MonoBehaviour
         {
             Debug.LogError("Emmisive Light D not found in the scene.");
         }
+        if (pizzaShopLight == null)
+        {
+            Debug.LogError("Pizza Shop Light not found in the scene.");
+        }
     }
 
     private void Update()
@@ -65,15 +71,19 @@ public class DeliveryLocation : MonoBehaviour
             {
                 case 1:
                     emissiveLightObjMission1.SetActive(true);
+                    pizzaShopLight.SetActive(false);
                     break;
                 case 2:
                     emissiveLightObjMission2.SetActive(true);
+                    pizzaShopLight.SetActive(false);
                     break;
                 case 3:
                     emissiveLightObjMission3.SetActive(true);
+                    pizzaShopLight.SetActive(false);
                     break;
                 case 4:
                     emissiveLightObjMission4.SetActive(true);
+                    pizzaShopLight.SetActive(false);
                     break;
                 default:
                     break;
@@ -85,6 +95,7 @@ public class DeliveryLocation : MonoBehaviour
             emissiveLightObjMission2.SetActive(false);
             emissiveLightObjMission3.SetActive(false);
             emissiveLightObjMission4.SetActive(false);
+            pizzaShopLight.SetActive(true);
         }
     }
 
