@@ -27456,7 +27456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.9}
   m_AnchorMax: {x: 0.2, y: 1}
-  m_AnchoredPosition: {x: -125.00012, y: 0}
+  m_AnchoredPosition: {x: -125.000244, y: 0}
   m_SizeDelta: {x: -250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1387055934
@@ -46728,6 +46728,14 @@ PrefabInstance:
     - target: {fileID: 954715665249890537, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
       propertyPath: m_Volume
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844303627745278088, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
+      propertyPath: m_Name
+      value: PizzaBag
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844303627745278088, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5569562301613413049, guid: 103ff590e88243744b4941f3dc0e233f, type: 3}
       propertyPath: m_Materials.Array.data[0]
