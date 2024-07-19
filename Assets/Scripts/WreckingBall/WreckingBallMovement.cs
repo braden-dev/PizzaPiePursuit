@@ -36,6 +36,8 @@ public class WreckingBallMovement : MonoBehaviour
     private float returnLastCheckTime = 0.0f;
     private float returnTimeBetweenChecks = 1.0f;
 
+    AudioSource chaseSound;
+
     public enum WreckingBallState
     {
         Patrol,
@@ -52,6 +54,7 @@ public class WreckingBallMovement : MonoBehaviour
         returnLastCheckTime = 0.0f;
         wreckingBallState = WreckingBallState.Patrol;
         smoothedWaypoints = GenerateSmoothPath();
+        chaseSound = GetComponent<AudioSource>();
         if (waypoints.Length == 0)
         {
             Debug.LogError("No waypoints set for the wreckingBall.");
@@ -88,6 +91,10 @@ public class WreckingBallMovement : MonoBehaviour
 
     private void Patrol()
     {
+        if (chaseSound.isPlaying == true)
+        {
+            chaseSound.Stop();
+        }
         // Move to waypoint.
         MoveAlongSmoothedPath();
         // Check if player is close enough.
@@ -96,6 +103,10 @@ public class WreckingBallMovement : MonoBehaviour
 
     private void ReturnToPatrol()
     {
+        if (chaseSound.isPlaying == true)
+        {
+            chaseSound.Stop();
+        }
         // Increment timer tracking return time.
         returnTimer += Time.deltaTime;
         if (returnTimer > returnDuration)
@@ -120,6 +131,10 @@ public class WreckingBallMovement : MonoBehaviour
 
     private void ChasePlayer()
     {
+        if (chaseSound.isPlaying == false)
+        {
+            chaseSound.Play();
+        }
         // Move towards the player.
         Vector3 direction = (transform.position - player.transform.position).normalized;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);

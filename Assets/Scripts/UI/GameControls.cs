@@ -7,6 +7,8 @@ using TMPro;
 public class GameControls : MonoBehaviour
 {
     string targetName = "Player";
+    string pizzaBagName = "PizzaBag";
+    GameObject pizzaBag;
 
     // Game Variables.
     [Header("Game Variables")]
@@ -81,6 +83,8 @@ public class GameControls : MonoBehaviour
     void Start()
     {
         GameObject player = GameObject.Find(targetName);
+        pizzaBag = GameObject.Find(pizzaBagName);
+        pizzaBag.SetActive(false);
         missionController = player.GetComponent<MissionController>();
         if(missionController == null)
         {
@@ -293,40 +297,37 @@ public class GameControls : MonoBehaviour
         SceneManager.LoadScene(mainWorldSceneName);
     }
 
-    public void StartLevel1()
+    public void StartLevelGeneral()
     {
         HideStartLevelMenu();
         ShowCanvas(hudCanvasGroup);
-        missionController.SetIsInMission(true, 1);
+        pizzaBag.SetActive(true);
         timer = maxTimer;
         currentRate = timerRate;
+    }
+
+    public void StartLevel1()
+    {
+        missionController.SetIsInMission(true, 1);
+        StartLevelGeneral();
     }
 
     public void StartLevel2()
     {
-        HideStartLevelMenu();
-        ShowCanvas(hudCanvasGroup);
         missionController.SetIsInMission(true, 2);
-        timer = maxTimer;
-        currentRate = timerRate;
+        StartLevelGeneral();
     }
 
     public void StartLevel3()
     {
-        HideStartLevelMenu();
-        ShowCanvas(hudCanvasGroup);
         missionController.SetIsInMission(true, 3);
-        timer = maxTimer;
-        currentRate = timerRate;
+        StartLevelGeneral();
     }
 
     public void StartLevel4()
     {
-        HideStartLevelMenu();
-        ShowCanvas(hudCanvasGroup);
         missionController.SetIsInMission(true, 4);
-        timer = maxTimer;
-        currentRate = timerRate;
+        StartLevelGeneral();
     }
 
     public void RestartCurrentLevel()
