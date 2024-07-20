@@ -2917,6 +2917,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6086789812979064711, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6903333207808389161, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
       propertyPath: fireRate
       value: 2
@@ -2926,12 +2930,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1462422539}
     - target: {fileID: 6903333207808389161, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903333207808389161, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
       propertyPath: laserPrefab
       value: 
       objectReference: {fileID: 1354887847809544728, guid: 46fb0ce0dda985246be4d4866b92d3a1, type: 3}
     - target: {fileID: 8110914826921809671, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
       propertyPath: m_Volume
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8110914826921809671, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8497082361582843035, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2957,6 +2969,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 810875270}
+    - target: {fileID: 8497082361583234591, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8497082361583234591, guid: dd186a59222ed3f4dbc6f649908944e6, type: 3}
       propertyPath: separationRadius
       value: 2
