@@ -125,8 +125,8 @@ public class DroneShooting : MonoBehaviour
     public void ResetFireTime()
     {
         // Introduce a longer lag by adding a fixed delay or a larger random range
-        float delay = 4.0f; 
-        nextFireTime = Time.time + delay + Random.Range(0.5f, 1.5f); // Adding randomness if needed
+        float delay = 1.0f; 
+        nextFireTime = Time.time + delay + Random.Range(0.0f, 1.0f); // Adding randomness if needed
     }
 
 }

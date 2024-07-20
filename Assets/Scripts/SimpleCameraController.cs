@@ -8,6 +8,8 @@ namespace UnityTemplateProjects
 {
     public class SimpleCameraController : MonoBehaviour
     {
+        public string showMouseKey = "1";
+
         class CameraState
         {
             public float yaw;
@@ -16,6 +18,7 @@ namespace UnityTemplateProjects
             public float x;
             public float y;
             public float z;
+            
 
             public void SetFromTransform(Transform t)
             {
@@ -263,9 +266,11 @@ namespace UnityTemplateProjects
         bool IsEscapePressed()
         {
 #if ENABLE_INPUT_SYSTEM
-            return Keyboard.current != null ? Keyboard.current.escapeKey.isPressed : false;
+            //return Keyboard.current != null ? Keyboard.current.escapeKey.isPressed : false;
+            return false;
 #else
-            return Input.GetKey(KeyCode.Escape);
+            //return Input.GetKey(KeyCode.Escape);
+            return Input.GetKeyDown(showMouseKey);
 #endif
         }
 

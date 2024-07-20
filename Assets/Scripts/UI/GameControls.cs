@@ -22,7 +22,7 @@ public class GameControls : MonoBehaviour
     // Pause Menu Variables.
     [Header("Pause Menu Variables")]
     public GameObject pauseMenu;
-    public string pauseMenuKey = "1";
+    KeyCode pauseMenuKey = KeyCode.Escape;
     public string startMenuSceneName = "GameStart";
     CanvasGroup pauseMenuCanvasGroup;
 
